@@ -13,23 +13,37 @@
 #define NOEUD_H_
 
 class Noeud{
+	public:
 
-	enum types {Ca=1, C=2, N=3};
+	enum Atom {Ca, C, N};
 
-public:
-	bool getPlace(void);
-	int getCompteur(void);
-	void setPlace(boolean b);
+	Noeud(int index, Atom type);
+
+	int  getIndex(void);
+	bool isPlaced(void);
+	int  getCompteur(void);
+
+	void setPlaced();
+
 	void incrCompteur(void);
-	int getIndex(void);
 
-private:
-	bool place;	//indique si le noeud est déjà positionné
-	int compteur;	//donne le nombre de voisins du noeud déjà placés
-	int index;		//identifiant du noeud
-	std::map<int,double> voisins;
-	int type;		//type de l'atome
-	Point coord;	//position de l'atome
+	std::string toString();
+
+
+	private:
+
+	// Identifiant du noeud
+	int index;
+	// Type de l'atome
+	Atom type;
+	// Indique si le noeud est déjà positionné
+	bool placed;
+	// Donne le nombre de voisins du noeud déjà placés
+	int compteur;
+	// Voisins du noeud
+	std::map<int, double> voisins;
+	// Position de l'atome
+	Point coord;
 
 };
 
