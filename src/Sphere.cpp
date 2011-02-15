@@ -21,10 +21,23 @@ Sphere::~Sphere() {
 	// TODO Auto-generated destructor stub
 }
 
-Sphere::intersectionSphere(Cercle c){
-	Point axe = new
+Sphere::intersectionSphere(Sphere s){
+	Point axe = this.getCentre().moins(s.getCentre());
+	double X = ( this.getRayon() * this.getCentre().getX() + s.getRayon() * s.getCentre().getX() ) / axe.norme();
+	double Y = ( this.getRayon() * this.getCentre().getY() + s.getRayon() * s.getCentre().getY() ) / axe.norme();
+	double Z = ( this.getRayon() * this.getCentre().getZ() + s.getRayon() * s.getCentre().getZ() ) / axe.norme();
+	Point barycentre = new Point(X,Y,Z);
+
+	Plan p = new Plan(axe, barycentre);
 
 }
+
+
+Point getCentre(void);
+double getRayon(void);
+
+void setCentre(Point centre);
+void setRayon(double d);
 
 
 

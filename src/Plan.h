@@ -11,6 +11,7 @@
 class Plan {
 public:
 	Plan();
+	Plan(Point n, Point p);
 	virtual ~Plan();
 
 private:
