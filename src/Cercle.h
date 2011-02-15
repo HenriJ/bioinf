@@ -12,6 +12,7 @@ class Cercle {
 public:
 	Cercle();
 	virtual ~Cercle();
+	Cercle(Point centre, double rayon, Plan p);
 
 private:
 	Point centre;

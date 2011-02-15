@@ -21,6 +21,9 @@ Sphere::~Sphere() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Calcule l'intersection de deux sphères. Si elle n'existe pas, rend un cercle de rayon -1
+ */
 Sphere::intersectionSphere(Sphere s){
 	Point axe = this.getCentre().moins(s.getCentre());
 	double X = ( this.getRayon() * this.getCentre().getX() + s.getRayon() * s.getCentre().getX() ) / axe.norme();
@@ -29,6 +32,17 @@ Sphere::intersectionSphere(Sphere s){
 	Point barycentre = new Point(X,Y,Z);
 
 	Plan p = new Plan(axe, barycentre);
+
+	double d = pow(this.getRayon(), 2) - pow( (barycentre.moins(this.getCentre()) ).norme() , 2) ;
+	if(d>=0){
+		double rayonCercle = sqrt(d);
+		return new Cercle(baryCentre, rayonCercle, p);
+	} else {
+		return new Cercle (new Point(), -1, new Plan());
+	}
+}
+
+Sphere::intersectionCercle(Cercle c){
 
 }
 
