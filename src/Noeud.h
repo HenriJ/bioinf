@@ -36,6 +36,7 @@ class Noeud{
 	void incrCompteur(void);
 
 	std::string toString();
+	void setCord(Point& P);
 
 
 	private:
