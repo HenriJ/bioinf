@@ -18,12 +18,20 @@ class Noeud{
 	enum Atom {Ca, C, N};
 
 	Noeud(int index, Atom type);
+	Noeud(int index, Atom type, Point p);
 
 	int  getIndex(void);
+	std::string getStringType();
 	bool isPlaced(void);
 	int  getCompteur(void);
 
+	std::map<double, Noeud> getVoisins();
+	std::string getStringVoisins();
+
+
 	void setPlaced();
+	void addVoisin(double dist, Noeud &n);
+	void addVoisin(Noeud &n);
 
 	void incrCompteur(void);
 
@@ -41,7 +49,7 @@ class Noeud{
 	// Donne le nombre de voisins du noeud déjà placés
 	int compteur;
 	// Voisins du noeud
-	std::map<int, double> voisins;
+	std::map<double, Noeud> voisins;
 	// Position de l'atome
 	Point coord;
 
