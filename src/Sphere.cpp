@@ -12,6 +12,19 @@ Sphere::Sphere() {
 
 }
 
+Sphere::Sphere(Point centre, double rayon){
+	this.centre = centre;
+	this.rayon = rayon;
+}
+
 Sphere::~Sphere() {
 	// TODO Auto-generated destructor stub
 }
+
+Sphere::intersectionSphere(Cercle c){
+	Point axe = new
+
+}
+
+
+

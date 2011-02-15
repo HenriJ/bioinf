@@ -25,7 +25,7 @@ class Sphere {
 
 	Cercle intersectionSpheres(Sphere p);
 
-	Point intersectionCercle(Cercle c);
+	Intersection intersectionCercle(Cercle c);
 
 
 	std::string toString();
