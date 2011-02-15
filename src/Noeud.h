@@ -31,7 +31,9 @@ class Noeud{
 
 
 	void setPlaced();
+
 	void unPlaced();
+
 	void addVoisin(double dist, Noeud &n);
 	void addVoisin(Noeud &n);
 
@@ -39,6 +41,7 @@ class Noeud{
 	void decrCompteur(void);
 
 	std::string toString();
+	void setCord(Point& P);
 
 
 	private:

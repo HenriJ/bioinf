@@ -24,6 +24,7 @@ class Point{
 	void setZ(double d);
 
 	double dist(Point p);
+	Point moins(Point p);
 
 	std::string toString();
 
