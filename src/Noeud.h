@@ -11,6 +11,7 @@
 #include <sstream>
 #include <math.h>
 #include "Intersection.h"
+#include "Sphere.h"
 
 
 #ifndef NOEUD_H_
