@@ -25,10 +25,6 @@ int Noeud::getCompteur() {
 	return compteur;
 }
 
-Point Noeud::getCoord() {
-	return coord;
-}
-
 
 void Noeud::setCoord(Point& P){
 	coord = P;
@@ -66,6 +62,9 @@ string Noeud::getStringVoisins() {
 	return out.str();
 }
 
+Point Noeud::getCoord(void){
+	return coord;
+}
 
 void Noeud::setPlaced() {
 	placed = true;
@@ -104,6 +103,7 @@ string Noeud::toString() {
 
 Intersection Noeud::trouverIntersection(void){
 
+<<<<<<< HEAD
 	Sphere s1;
 	Sphere s2;
 	Sphere s3;
@@ -134,3 +134,4 @@ Intersection Noeud::trouverIntersection(void){
 	}
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
 }
+

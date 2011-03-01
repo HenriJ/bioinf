@@ -19,3 +19,16 @@ Cercle::~Cercle() {
 }
 
 Cercle::Cercle (Point point, double d, Plan h): centre(point), rayon(d), p(h){}
+
+Point Cercle::getCentre(void){
+	return centre;
+}
+double Cercle::getRayon(void){
+	return rayon;
+}
+Plan Cercle::getPlan(void){
+	return p;
+}
+
+
+
