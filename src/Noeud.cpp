@@ -25,10 +25,6 @@ int Noeud::getCompteur() {
 	return compteur;
 }
 
-Point Noeud::getCoord() {
-	return coord;
-}
-
 
 void Noeud::setCoord(Point& P){
 	coord = P;
@@ -139,3 +135,4 @@ Intersection Noeud::trouverIntersection(void){
 		return Intersection(s1, s2, s3, s4);
 
 }
+
