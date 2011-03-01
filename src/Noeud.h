@@ -7,6 +7,9 @@
 
 #include "Point.h"
 #include <map>
+#include <string>
+#include <sstream>
+#include <math.h>
 #include "Intersection.h"
 
 

@@ -5,6 +5,7 @@
  *      Author: Marie
  */
 
+
 #ifndef POINT_H_
 #define POINT_H_
 #include <string>
@@ -25,6 +26,7 @@ class Point{
 
 	double dist(Point p);
 	Point moins(Point p);
+	double norme();
 
 	std::string toString();
 

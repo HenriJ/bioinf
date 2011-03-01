@@ -8,9 +8,12 @@
 #ifndef PLAN_H_
 #define PLAN_H_
 
+#include "Point.h"
+
 class Plan {
 public:
 	Plan();
+	Plan(Point n, Point p);
 	virtual ~Plan();
 
 private:
