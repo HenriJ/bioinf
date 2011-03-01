@@ -26,10 +26,15 @@ bool Noeud::isPlaced() {
 int Noeud::getCompteur() {
 	return compteur;
 }
-void Noeud::setCord(Point& P){
-coord=P;
 
+Point Noeud::getCoord() {
+	return coord;
 }
+
+void Noeud::setCoord(Point& P){
+	coord = P;
+}
+
 string Noeud::getStringType() {
 	if (type == Ca)
 		return "Ca";
