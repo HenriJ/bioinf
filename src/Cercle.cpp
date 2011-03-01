@@ -5,6 +5,8 @@
  *      Author: samuel
  */
 
+#include "Point.h"
+#include "Plan.h"
 #include "Cercle.h"
 
 Cercle::Cercle() {
@@ -15,3 +17,5 @@ Cercle::Cercle() {
 Cercle::~Cercle() {
 	// TODO Auto-generated destructor stub
 }
+
+Cercle::Cercle (Point point, double d, Plan h): centre(point), rayon(d), p(h){}

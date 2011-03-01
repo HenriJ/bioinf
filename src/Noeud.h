@@ -7,6 +7,10 @@
 
 #include "Point.h"
 #include <map>
+#include <string>
+#include <sstream>
+#include <math.h>
+#include "Intersection.h"
 
 
 #ifndef NOEUD_H_
@@ -44,6 +48,9 @@ class Noeud{
 
 	std::string toString();
 	void setCoord(Point& P);
+	void affecter(Point& P);
+
+	Intersection trouverIntersection(void);
 
 
 	private:
