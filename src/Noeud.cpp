@@ -26,7 +26,10 @@ bool Noeud::isPlaced() {
 int Noeud::getCompteur() {
 	return compteur;
 }
+void Noeud::setCord(Point& P){
+coord=P;
 
+}
 string Noeud::getStringType() {
 	if (type == Ca)
 		return "Ca";
@@ -40,7 +43,7 @@ string Noeud::getStringType() {
 	return "0";
 }
 
-map<double, Noeud> Noeud::getVoisins() {
+map<double, Noeud> &Noeud::getVoisins() {
 	return voisins;
 }
 
@@ -58,6 +61,10 @@ void Noeud::setPlaced() {
 	placed = true;
 }
 
+void Noeud::unPlaced(){
+	placed=false;
+}
+
 void Noeud::addVoisin(double dist, Noeud &n) {
 	voisins.insert(pair<double, Noeud>(dist, n));
 }
@@ -69,6 +76,11 @@ void Noeud::addVoisin(Noeud &n) {
 void Noeud::incrCompteur() {
 	compteur++;
 }
+
+void Noeud::decrCompteur() {
+	compteur--;
+}
+
 
 string Noeud::toString() {
 	stringstream out;

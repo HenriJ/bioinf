@@ -26,18 +26,24 @@ int main() {
 	Point a(1, 1, 1);
 	Point b(1, 2, 13);
 
-	cout << "Point a: " << a << endl;
-	cout << "Point b: " << b << endl;
-	cout << "Dist a-b: " << a.dist(b) << endl;
-
 	map<int, Noeud> noeuds;
 
-	Noeud n(1, Noeud::C);
-	noeuds.insert(pair<int, Noeud>(n.getIndex(), n));
+	Noeud n1(1, Noeud::C, a);
+	noeuds.insert(pair<int, Noeud>(n1.getIndex(), n1));
+	Noeud n2(2, Noeud::Ca, b);
+	n2.addVoisin(n1);
+	n2.addVoisin(n2);
+	noeuds.insert(pair<int, Noeud>(n2.getIndex(), n2));
 
+	Noeud *n;
 	for (map<int, Noeud>::iterator it = noeuds.begin() ; it != noeuds.end(); it++ ) {
-		cout << "Noeud " << (*it).first << " => " << (*it).second << endl;
+		cout << it->first << " ";
+		n = &(it->second);
+		cout << n->getStringType() << " ";
+		cout << n->getStringVoisins() << " ";
+		cout << endl;
 	}
+
 
 	return 0;
 }

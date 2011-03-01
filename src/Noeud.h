@@ -17,6 +17,7 @@ class Noeud{
 
 	enum Atom {Ca, C, N};
 
+	Noeud(){}
 	Noeud(int index, Atom type);
 	Noeud(int index, Atom type, Point p);
 
@@ -25,17 +26,23 @@ class Noeud{
 	bool isPlaced(void);
 	int  getCompteur(void);
 
-	std::map<double, Noeud> getVoisins();
+	std::map<double, Noeud> &getVoisins();
+	Noeud* next();
 	std::string getStringVoisins();
 
 
 	void setPlaced();
+
+	void unPlaced();
+
 	void addVoisin(double dist, Noeud &n);
 	void addVoisin(Noeud &n);
 
 	void incrCompteur(void);
+	void decrCompteur(void);
 
 	std::string toString();
+	void setCord(Point& P);
 
 
 	private:
