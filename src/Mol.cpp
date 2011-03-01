@@ -51,7 +51,8 @@ Mol Mol::importerPDB(std::string path) {
 }
 
 string Mol::exporterXYZ(){
-    ofstream myFile;
+
+	ofstream myFile;
     myFile.open("exemple.xyz");
 	int a=noeuds.size();
 	myFile << a << "\n";
