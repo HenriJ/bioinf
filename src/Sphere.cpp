@@ -46,7 +46,7 @@ Cercle Sphere::intersectionSphere(Sphere s){
 }
 
 Intersection Sphere::intersectionCercle(Cercle c){
-
+	Point POmega = this->getCentre().moins(c.getPlan().getPoint());
 
 	return Intersection();
 }
