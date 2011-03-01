@@ -4,6 +4,7 @@
 #include "Mol.h"
 #include "Point.h"
 #include "Noeud.h"
+#include <fstream>
 using namespace std;
 
 Mol::Mol() {
@@ -47,6 +48,20 @@ Mol Mol::importerPDB(std::string path) {
 	mol.insert(n3);
 
 	return mol;
+}
+
+string Mol::exporterXYZ(){
+    ofstream myFile;
+    myFile.open("exemple.xyz");
+	int a=noeuds.size();
+	myFile << a << "\n";
+    for (int i=1;i<=a;i++){
+    	myFile << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
+
+    }
+
+
+return "";
 }
 
 void Mol::insert(Noeud& n) {
