@@ -53,16 +53,17 @@ Mol Mol::importerPDB(std::string path) {
 string Mol::exporterXYZ(){
 
 	ofstream myFile;
-    myFile.open("exemple.xyz");
+    myFile.open("example.xyz");
 	int a=noeuds.size();
 	myFile << a << "\n";
+	myFile << "This geometry optimized by G92;  MP2/6-31G* \n";
     for (int i=1;i<=a;i++){
     	myFile << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
 
 
     }
 
-
+myFile.close();
 return "";
 }
 
