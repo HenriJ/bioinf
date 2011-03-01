@@ -66,7 +66,7 @@ string Noeud::getStringVoisins() {
 	return out.str();
 }
 
-Point Noeud::getCord(void){
+Point Noeud::getCoord(void){
 	return coord;
 }
 
@@ -115,22 +115,22 @@ Intersection Noeud::trouverIntersection(void){
 		for (map<double, Noeud>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
 			if ((*it).second.isPlaced()){
 				if (i==1){
-					s1=Sphere ((*it).second.getCord(),(*it).first);
+					s1=Sphere ((*it).second.getCoord(),(*it).first);
 					i++;
 				}
 				if (i==2){
-					s2=Sphere ((*it).second.getCord(),(*it).first);
+					s2=Sphere ((*it).second.getCoord(),(*it).first);
 					i++;
 				}
 				if (i==3){
-					s3=Sphere ((*it).second.getCord(),(*it).first);
+					s3=Sphere ((*it).second.getCoord(),(*it).first);
 					i++;
 					if(getCompteur()==3){
 						return Intersection(s1, s2, s3);
 					}
 				}
 				if (i==4){
-					s4=Sphere ((*it).second.getCord(),(*it).first);
+					s4=Sphere ((*it).second.getCoord(),(*it).first);
 					break;
 				}
 			}
