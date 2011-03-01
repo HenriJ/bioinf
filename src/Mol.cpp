@@ -59,6 +59,7 @@ string Mol::exporterXYZ(){
     for (int i=1;i<=a;i++){
     	myFile << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
 
+
     }
 
 
