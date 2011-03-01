@@ -19,6 +19,10 @@ public:
 	virtual ~Cercle();
 	Cercle(Point centre, double rayon, Plan p);
 
+	Point getCentre(void);
+	double getRayon(void);
+	Plan getPlan(void);
+
 private:
 	Point centre;
 	double rayon;

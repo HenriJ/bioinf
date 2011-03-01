@@ -1,3 +1,5 @@
+src/destructor/Destructor
+src/restructor/Restructor
 .project
 .cproject
 Debug

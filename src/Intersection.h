@@ -14,8 +14,11 @@
 class Intersection {
 public:
 	Intersection();
-
+	Intersection(int n, set<Point> points);
 	virtual ~Intersection();
+
+	int getNombre(void);
+	std::set<Point> getPoints(void);
 
 private:
 	int nombre;

@@ -47,6 +47,17 @@ Point Point::moins(Point p){
 	return Point(X,Y,Z);
 }
 
+Point Point::foisScalaire(double d){
+	double X = this->getX() * d;
+	double Y = this->getY() * d;
+	double Z = this->getZ() * d;
+	return Point(X,Y,Z);
+}
+
+double Point::scalaire(Point p){
+	return ( this->getX() * p.getX() + this->getY() * p.getY() + this->getZ() * p.getZ() );
+}
+
 double Point::norme(){
 	Point Zero = Point(0,0,0);
 	return this->dist(Zero);
