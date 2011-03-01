@@ -25,6 +25,7 @@ public:
 	bool anticiper (int i);
 	void desanticiper(int i);
 
+
 private:
 	map<int, Noeud> noeuds;
 	map<int, set<int> > anticipation;
