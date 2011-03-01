@@ -15,17 +15,13 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	Graphe mol;
+	Mol mol;
 
 	/*
 	 * Import du graphe partiel
 	 */
-	Noeud n1(1, Noeud::C, Point(1, 1, 1));
-	graphe.insert(n1);
-	Noeud n2(2, Noeud::Ca, Point(1, 2, 13));
-	graphe.insert(n2);
-	Noeud n3(3, Noeud::N, Point(2, 0, 1));
-	graphe.insert(n3);
+ mol=mol.importerGraphe("mol.graphe");
+
 
 	/*
 	 * TODO: Reconstruction du (ou des) graphe(s) avec positionnement
@@ -36,7 +32,7 @@ int main(int argc, char *argv[]) {
 	/*
 	 * Exporte la molécule au format XYZ
 	 */
-	cout << mol.exporterGraphe();
+	cout << mol.exporterXYZ();
 
 	return 0;
 }
