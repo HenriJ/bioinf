@@ -32,6 +32,10 @@ public:
 
 	Intersection intersectionCercle(Cercle c);
 
+	Intersection intersectionTroisSpheres(Sphere t, Sphere u);
+
+	Intersection intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v);
+
 	std::string toString();
 
 
