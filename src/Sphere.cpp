@@ -46,6 +46,8 @@ Cercle Sphere::intersectionSphere(Sphere s){
 }
 
 Intersection Sphere::intersectionCercle(Cercle c){
+
+
 	return Intersection();
 }
 
