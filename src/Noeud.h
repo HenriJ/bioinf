@@ -26,7 +26,8 @@ class Noeud{
 	bool isPlaced(void);
 	int  getCompteur(void);
 
-	std::map<double, Noeud> getVoisins();
+	std::map<double, Noeud> &getVoisins();
+	Noeud* next();
 	std::string getStringVoisins();
 
 

@@ -43,34 +43,7 @@ string Noeud::getStringType() {
 	return "0";
 }
 
-map<double, Noeud> Noeud::getVoisins() {
-	return voisins;
-}
-
-string Noeud::getStringVoisins() {
-	stringstream out;
-
-	for (map<double, Noeud>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
-		out << it->first << ","  << it->second.getIndex() << " ";
-	}
-
-	return out.str();
-}
-
-string Noeud::getStringType() {
-	if (type == Ca)
-		return "Ca";
-
-	if (type == C)
-		return "C";
-
-	if (type == N)
-		return "N";
-
-	return "0";
-}
-
-map<double, Noeud> Noeud::getVoisins() {
+map<double, Noeud> &Noeud::getVoisins() {
 	return voisins;
 }
 
