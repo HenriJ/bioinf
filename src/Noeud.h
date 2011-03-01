@@ -21,10 +21,11 @@ class Noeud{
 	Noeud(int index, Atom type);
 	Noeud(int index, Atom type, Point p);
 
-	int  getIndex(void);
+	int   getIndex(void);
+	bool  isPlaced(void);
+	Point getCoord(void);
+	int   getCompteur(void);
 	std::string getStringType();
-	bool isPlaced(void);
-	int  getCompteur(void);
 
 	std::map<double, Noeud> &getVoisins();
 	Noeud* next();
@@ -42,7 +43,7 @@ class Noeud{
 	void decrCompteur(void);
 
 	std::string toString();
-	void setCord(Point& P);
+	void setCoord(Point& P);
 
 
 	private:
