@@ -2,56 +2,62 @@
  * Sphere.cpp
  *
  *  Created on: 15 févr. 2011
- *      Author: samuel
  */
 
+#include "Plan.h"
 #include "Sphere.h"
+#include <math.h>
 
-Sphere::Sphere() {
-	// TODO Auto-generated constructor stub
-
-}
+Sphere::Sphere() {}
 
 Sphere::Sphere(Point centre, double rayon){
-	this.centre = centre;
-	this.rayon = rayon;
+	this->centre = centre;
+	this->rayon = rayon;
 }
 
-Sphere::~Sphere() {
-	// TODO Auto-generated destructor stub
+Sphere::~Sphere() {}
+
+Point Sphere::getCentre(void){
+	return centre;
+}
+double Sphere::getRayon(void){
+	return rayon;
 }
 
 /**
  * Calcule l'intersection de deux sphères. Si elle n'existe pas, rend un cercle de rayon -1
  */
-Sphere::intersectionSphere(Sphere s){
-	Point axe = this.getCentre().moins(s.getCentre());
-	double X = ( this.getRayon() * this.getCentre().getX() + s.getRayon() * s.getCentre().getX() ) / axe.norme();
-	double Y = ( this.getRayon() * this.getCentre().getY() + s.getRayon() * s.getCentre().getY() ) / axe.norme();
-	double Z = ( this.getRayon() * this.getCentre().getZ() + s.getRayon() * s.getCentre().getZ() ) / axe.norme();
-	Point barycentre = new Point(X,Y,Z);
+Cercle Sphere::intersectionSphere(Sphere s){
+	Point axe = centre.moins(s.getCentre());
+	double X = ( this->getRayon() * this->getCentre().getX() + s.getRayon() * s.getCentre().getX() ) / axe.norme();
+	double Y = ( this->getRayon() * this->getCentre().getY() + s.getRayon() * s.getCentre().getY() ) / axe.norme();
+	double Z = ( this->getRayon() * this->getCentre().getZ() + s.getRayon() * s.getCentre().getZ() ) / axe.norme();
+	Point baryCentre = Point(X,Y,Z);
 
-	Plan p = new Plan(axe, barycentre);
+	Plan p = Plan(axe, baryCentre);
 
-	double d = pow(this.getRayon(), 2) - pow( (barycentre.moins(this.getCentre()) ).norme() , 2) ;
+	double d = pow(this->getRayon(), 2) - pow( (baryCentre.moins(this->getCentre()) ).norme() , 2) ;
 	if(d>=0){
 		double rayonCercle = sqrt(d);
-		return new Cercle(baryCentre, rayonCercle, p);
+		return Cercle(baryCentre, rayonCercle, p);
 	} else {
-		return new Cercle (new Point(), -1, new Plan());
+		return Cercle ( Point(), -1, Plan());
 	}
 }
 
-Sphere::intersectionCercle(Cercle c){
-
+Intersection Sphere::intersectionCercle(Cercle c){
+	return Intersection();
 }
 
 
-Point getCentre(void);
-double getRayon(void);
 
-void setCentre(Point centre);
-void setRayon(double d);
+
+void Sphere::setCentre(Point centre){
+	this->centre = centre;
+}
+void Sphere::setRayon(double d){
+	this->rayon = d;
+}
 
 
 

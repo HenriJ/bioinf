@@ -5,12 +5,17 @@
  *      Author: samuel
  */
 
+
 #ifndef SPHERE_H_
 #define SPHERE_H_
 
-class Sphere {
-	public:
+#include "Point.h"
+#include "Cercle.h"
+#include "Plan.h"
+#include "Intersection.h"
 
+class Sphere {
+public:
 
 	Sphere();
 	Sphere(Point centre, double rayon);
@@ -23,15 +28,14 @@ class Sphere {
 	void setRayon(double d);
 
 
-	Cercle intersectionSpheres(Sphere p);
+	Cercle intersectionSphere(Sphere s);
 
 	Intersection intersectionCercle(Cercle c);
-
 
 	std::string toString();
 
 
-	private:
+private:
 
 	Point centre;
 	double rayon;

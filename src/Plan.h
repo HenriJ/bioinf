@@ -8,6 +8,8 @@
 #ifndef PLAN_H_
 #define PLAN_H_
 
+#include "Point.h"
+
 class Plan {
 public:
 	Plan();

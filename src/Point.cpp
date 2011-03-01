@@ -1,7 +1,9 @@
-#include "Point.h"
-#include <string>
+
+
 #include <sstream>
 #include <math.h>
+#include "Point.h"
+
 
 using namespace std;
 
@@ -39,15 +41,15 @@ double Point::dist(Point p) {
 }
 
 Point Point::moins(Point p){
-	double X = this.getX() - p.getX();
-	double Y = this.getY() - p.getY();
-	double Z = this.getZ() - p.getZ();
-	return new Point(X,Y,Z);
+	double X = this->getX() - p.getX();
+	double Y = this->getY() - p.getY();
+	double Z = this->getZ() - p.getZ();
+	return Point(X,Y,Z);
 }
 
-double norme(){
-	Point Zero = new Point(0,0,0);
-	return this.dist(Zero);
+double Point::norme(){
+	Point Zero = Point(0,0,0);
+	return this->dist(Zero);
 }
 
 string Point::toString() {
