@@ -48,7 +48,7 @@ string Mol::exporterGraphe() {
 /*
  * Importe un fichier PDB et créé les liens entre les Noeuds
  */
-Mol Mol::importerPDB(std::string path) {
+Mol Mol::importerPDB(string path) {
 	Mol mol;
 
 	ifstream infile;
@@ -112,20 +112,69 @@ Mol Mol::importerPDB(std::string path) {
 	return mol;
 }
 
-string Mol::exporterXYZ() {
-	ofstream myFile;
+/*
+ * Importe un fichier Graphe
+ */
+Mol Mol::importerGraphe(string path) {
+	Mol mol;
 
-	myFile.open("example.xyz");
-	int a=noeuds.size();
-	myFile << a << "\n";
-	myFile << "This geometry optimized by G92;  MP2/6-31G* \n";
+	ifstream grapheFile(path.c_str());
 
-	for (int i=1;i<=a;i++){
-		myFile << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
+	while (!grapheFile.eof() ) {
+		char buf[80] = {0}; // 80 charactères devraient suffire
+
+		grapheFile.getline( buf, sizeof( buf ) );
+
+		istringstream istr(string(buf), ios_base::out);
+
+		char type;
+		istr.get(type); // On regarde si on charge un noeud ou un lien
+		istr.get(); // On consomme l'espace suivant aussi.
+
+		if (type == 'N') {
+			int index;
+			string atome;
+
+			istr >> index >> atome;
+
+			Noeud::Atom atom;
+
+			if (atome.compare("C")) {
+				atom = Noeud::C;
+			} else if (atome.compare("Ca")) {
+				atom = Noeud::Ca;
+			} else if (atome.compare("N")) {
+				atom = Noeud::N;
+			}
+
+			Noeud n(index, atom);
+			mol.insert(n);
+		} else if (type == 'L') {
+			int indexA, indexB;
+			double dist;
+
+			istr >> indexA >> dist >> indexB;
+
+			mol[indexA].addVoisin(mol[indexB]);
+			mol[indexB].addVoisin(mol[indexA]);
+		}
 	}
 
-	myFile.close();
-	return "";
+	return mol;
+}
+
+string Mol::exporterXYZ() {
+	stringstream out;
+
+	int a = noeuds.size();
+	out << a << "\n";
+	out << "This geometry optimized by G92;  MP2/6-31G* \n";
+
+	for (int i=1;i<=a;i++){
+		out << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
+	}
+
+	return out.str();
 }
 
 void Mol::insert(Noeud& n) {

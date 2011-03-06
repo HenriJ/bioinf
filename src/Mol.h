@@ -9,6 +9,7 @@ class Mol {
 		virtual ~Mol();
 
 		static Mol importerPDB(std::string path);
+		static Mol importerGraphe(std::string path);
 
 		Noeud& operator[](int i);
 		std::string exporterGraphe();

@@ -15,12 +15,16 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	Mol mol;
+	std::string path = "mol.graphe";
+
+	if (argc > 1) {
+		path = argv[1];
+	}
 
 	/*
 	 * Import du graphe partiel
 	 */
- mol=mol.importerGraphe("mol.graphe");
+	Mol mol = mol.importerGraphe(path);
 
 
 	/*
@@ -29,10 +33,11 @@ int main(int argc, char *argv[]) {
 	 */
 
 
+
 	/*
 	 * Exporte la molécule au format XYZ
 	 */
-	cout << mol.exporterXYZ();
+	//cout << mol.exporterXYZ();
 
 	return 0;
 }
