@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Constructeurs & Destructeur & Affichage
+ */
+
 Noeud::Noeud(int index, Atom type): index(index), type(type) {
 	placed = false;
 	compteur = 0;
@@ -12,6 +16,20 @@ Noeud::Noeud(int index, Atom type, Point p): index(index), type(type), coord(p) 
 	placed = false;
 	compteur = 0;
 }
+
+string Noeud::toString() {
+	stringstream out;
+	out << "{index: " << index << ", type: ";
+
+	out << getStringType();
+
+	out << ", place: " << placed << "}";
+	return out.str();
+}
+
+/*
+ * Getters
+ */
 
 int Noeud::getIndex() {
 	return index;
@@ -23,16 +41,6 @@ bool Noeud::isPlaced() {
 
 int Noeud::getCompteur() {
 	return compteur;
-}
-
-
-void Noeud::setCoord(Point& P){
-	coord = P;
-}
-
-void Noeud::affecter(Point& P){
-	setCoord(P);
-	setPlaced();
 }
 
 string Noeud::getStringType() {
@@ -66,6 +74,19 @@ Point Noeud::getCoord(void){
 	return coord;
 }
 
+/*
+ * Setters
+ */
+
+void Noeud::setCoord(Point& P) {
+	coord = P;
+}
+
+void Noeud::affecter(Point& P) {
+	setCoord(P);
+	setPlaced();
+}
+
 void Noeud::setPlaced() {
 	placed = true;
 }
@@ -90,20 +111,8 @@ void Noeud::decrCompteur() {
 	compteur--;
 }
 
-
-string Noeud::toString() {
-	stringstream out;
-	out << "{index: " << index << ", type: ";
-
-	out << getStringType();
-
-	out << ", place: " << placed << "}";
-	return out.str();
-}
-
-Intersection Noeud::trouverIntersection(void){
-
-<<<<<<< HEAD
+Intersection Noeud::trouverIntersection(void) {
+	/*
 	Sphere s1;
 	Sphere s2;
 	Sphere s3;
@@ -133,5 +142,6 @@ Intersection Noeud::trouverIntersection(void){
 		}
 	}
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
+	*/
 }
 

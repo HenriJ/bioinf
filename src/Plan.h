@@ -15,6 +15,7 @@ public:
 	Plan();
 	Plan(Point n, Point p);
 	virtual ~Plan();
+	Point getPoint();
 
 private:
 	Point normale;

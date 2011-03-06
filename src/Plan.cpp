@@ -17,3 +17,7 @@ Plan::~Plan() {
 
 Plan::Plan(Point n, Point p): normale(n),point(p) {
 }
+
+Point Plan::getPoint() {
+	return Point(); //TODO
+}

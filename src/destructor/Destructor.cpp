@@ -10,33 +10,36 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <fstream>
+
 #include "../Noeud.h"
 #include "../Mol.h"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	Mol mol;
+	std::string path = "mol.pdb";
+
+	if (argc > 1) {
+		path = argv[1];
+	}
 
 	/*
-	 * TODO: lire le fichier PDB et le convertir en graphe
+	 * Lis le fichier PDB et le converti en graphe
 	 */
-	mol = mol.importerPDB("mol.pdb");
-
-	/*
-	 * TODO: Construire les liens entres Noeud
-	 * étant distants de moins de X
-	 */
-	mol[1].addVoisin(mol[2]);
-	mol[2].addVoisin(mol[1]);
-
-//	for (Noeud* n = graphe.reset(); n = graphe.next();) {
-//		cout << n->getIndex() << endl;
-//	}
+	Mol mol = mol.importerPDB(path);
 
 	/*
 	 * Exporte le graphe (ie juste les atomes et leurs liaisons)
 	 */
-	cout << mol.exporterGraphe();
+	ostream* output = &cout;
+
+	if (argc > 2) {
+		ofstream *outfile = new ofstream(argv[2]);
+		output = outfile;
+	}
+
+	*output << mol.exporterGraphe();
 
 	return 0;
 }
