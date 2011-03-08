@@ -23,11 +23,21 @@ Mol::~Mol() {
 
 }
 
+/**
+ * Surcharge de l'opérateur [] pour un accès direct aux noeuds d'un objet mol
+ * @param i index du noeud dans la molécule
+ */
 Noeud* Mol::operator[](int i)
 {
 	return noeuds[i];
 }
 
+
+/**
+ *export du graphe construit à l'aide de l'objet mol courant
+ *@return une chaine de caractères qui liste d'abord l'ensemble des noeuds qui forme la molécule puis la liste des liens existants entre deux donnés en indiquant les noeuds concernés et la distance entre eux
+ *
+ */
 string Mol::exporterGraphe() {
 	stringstream out_noeuds;
 	stringstream out_liens;
@@ -45,8 +55,10 @@ string Mol::exporterGraphe() {
 	return out_noeuds.str();
 }
 
-/*
- * Importe un fichier PDB et cr√©√© les liens entre les Noeuds
+/**
+ * Importe un fichier PDB et crée les liens de voisinage entre les noeuds de la molécule
+ * @param path fichier .PDB à traiter
+ * @return Un objet Mol correspondant au fichier importé
  */
 Mol Mol::importerPDB(string path) {
 	Mol mol;
@@ -112,8 +124,9 @@ Mol Mol::importerPDB(string path) {
 	return mol;
 }
 
-/*
- * Importe un fichier Graphe
+/**
+ * Crée un objet Mol à partir d'un fichier de données
+ * @param path adresse d'un fichier de données
  */
 Mol Mol::importerGraphe(string path) {
 	Mol mol;
@@ -161,7 +174,10 @@ Mol Mol::importerGraphe(string path) {
 
 	return mol;
 }
-
+/**
+ * Export du fichier mol sous format .xyz
+ * @return une chaine de caractères qui à chaque noeud associe son index et ses coordonnées
+ */
 string Mol::exporterXYZ() {
 	stringstream out;
 
@@ -176,19 +192,33 @@ string Mol::exporterXYZ() {
 	return out.str();
 }
 
+/**
+ * Ajoute le noeud n à la molécule courante
+ * @param n noeud d'index n
+ */
 void Mol::insert(Noeud* n) {
 	noeuds.insert(pair<int, Noeud*>(n->getIndex(), n));
 }
 
+/**
+ * @return le nombre de noeuds de la molécule
+ */
 int Mol::size() {
 	return noeuds.size();
 }
 
+/**
+ *Parcours des noeuds de la molécule, utilisé pour alléger les notations dans d'autres fonctions
+ *
+ */
 Noeud* Mol::reset() {
 	internalIterator = noeuds.begin();
 	return internalIterator->second;
 }
 
+/**
+ * @return un pointeur vers le noeud suivant le noeud courant
+ */
 Noeud* Mol::next() {
 	if (internalIterator != noeuds.end()) {
 		return (internalIterator++)->second;
