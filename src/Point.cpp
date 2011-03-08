@@ -47,6 +47,13 @@ Point Point::moins(Point p){
 	return Point(X,Y,Z);
 }
 
+Point Point::plus(Point p){
+	double X = this->getX() + p.getX();
+	double Y = this->getY() + p.getY();
+	double Z = this->getZ() + p.getZ();
+	return Point(X,Y,Z);
+}
+
 Point Point::foisScalaire(double d){
 	double X = this->getX() * d;
 	double Y = this->getY() * d;
@@ -56,6 +63,13 @@ Point Point::foisScalaire(double d){
 
 double Point::scalaire(Point p){
 	return ( this->getX() * p.getX() + this->getY() * p.getY() + this->getZ() * p.getZ() );
+}
+
+Point Point::vectoriel(Point p){
+	double X = this->getY() * p.getZ() - this->getZ() * p.getY();
+	double Y = this->getZ() * p.getX() - this->getX() * p.getZ();
+	double Z = this->getX() * p.getY() - this->getY() * p.getX();
+	return Point(X,Y,Z);
 }
 
 double Point::norme(){

@@ -36,6 +36,8 @@ public:
 
 	Intersection intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v);
 
+	bool appartient(Point p);
+
 	std::string toString();
 
 

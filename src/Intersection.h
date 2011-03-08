@@ -8,21 +8,21 @@
 #ifndef INTERSECTION_H_
 #define INTERSECTION_H_
 
-#include <set>
+#include <list>
 #include "Point.h"
 
 class Intersection {
 public:
 	Intersection();
-	Intersection(int n, std::set<Point> points);
+	Intersection(int n, std::list<Point> points);
 	virtual ~Intersection();
 
 	int getNombre(void);
-	std::set<Point> getPoints(void);
+	std::list<Point> getPoints(void);
 
 private:
 	int nombre;
-	std::set<Point> points;
+	std::list<Point> points;
 };
 
 #endif /* INTERSECTION_H_ */

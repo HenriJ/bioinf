@@ -6,7 +6,7 @@
  */
 #include "Sphere.h"
 #include "Point.h"
-#include <set>
+#include <list>
 #include "Intersection.h"
 
 Intersection::Intersection() {

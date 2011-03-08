@@ -26,8 +26,10 @@ class Point{
 
 	double dist(Point p);
 	Point moins(Point p);
+	Point plus(Point p);
 	Point foisScalaire(double d);
 	double scalaire(Point p);
+	Point vectoriel(Point p);
 	double norme();
 
 	std::string toString();
