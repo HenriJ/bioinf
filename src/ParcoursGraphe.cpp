@@ -15,6 +15,9 @@ ParcoursGraphe::ParcoursGraphe(string s){
 
 }
 
+/**
+ * cette fonction efface toute trace d'une éventuelle anticipation sur le noeud i
+ */
 void ParcoursGraphe::desanticiper(int i){
 	set<int> settmp=anticipation[i];
 	for (set<int>::iterator it=settmp.begin(); it != settmp.end(); it++) {
@@ -26,6 +29,10 @@ void ParcoursGraphe::desanticiper(int i){
 	}
 }
 
+/**
+ *  Cette fonction essaye d'anticiper sur les voisins du noeud i, sachant que
+ *  le noeud courant est le noeud k
+ */
 bool ParcoursGraphe::anticiper (int i, int k){
 
 	anticipation.insert(make_pair (i, set<int>()));
@@ -55,6 +62,11 @@ bool ParcoursGraphe::anticiper (int i, int k){
 	return true;
 }
 
+
+/**
+ * cette fonction parcourt l'arbre des choix de façon récursive en profondeur. Elle place le noeud i,
+ * s'appelle elle meme sur le noeud i+1, et revient au point de départ
+ */
 void  ParcoursGraphe::placer (int i){
 	if (i==(int)(1+noeuds.size())){
 		stocker();
@@ -63,7 +75,7 @@ void  ParcoursGraphe::placer (int i){
 		if (!(noeuds[i].isPlaced())){
 			Intersection inter=noeuds[i].trouverIntersection();
 			int m=inter.getNombre(); //normalement, m=1 ou m=2
-			set<Point>::iterator it=inter.getPoints().begin();
+			std::list<Point>::iterator it=inter.getPoints().begin();
 			for( int k=0; k<m;k++){
 				Point p=*it;
 				noeuds[i].affecter(p);

@@ -112,7 +112,7 @@ void Noeud::decrCompteur() {
 }
 
 Intersection Noeud::trouverIntersection(void) {
-	/*
+
 	Sphere s1;
 	Sphere s2;
 	Sphere s3;
@@ -142,6 +142,6 @@ Intersection Noeud::trouverIntersection(void) {
 		}
 	}
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
-	*/
+
 }
 

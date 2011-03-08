@@ -5,7 +5,7 @@
  *      Author: samuel
  */
 
-#include "Constantes.h"
+#include "Constantes.cpp"
 #include "Point.h"
 #include "Plan.h"
 #include "Cercle.h"
@@ -46,13 +46,13 @@ Intersection Cercle::intersectionCercle(Cercle c){
 		double distance = sqrt(distanceCarree);
 		Point p1 = barycentre.plus(direction.foisScalaire(distance/direction.norme()));
 		Point p2 = barycentre.moins(direction.foisScalaire(distance/direction.norme()));
-		ens.pushFront(p1);
-		ens.pushFront(p2);
+		ens.push_front(p1);
+		ens.push_front(p2);
 		return Intersection(2,ens);
 	}
 	// Un seul point
 	else if (distanceCarree > - Constantes::EPSILON){
-		ens.pushFront(barycentre);
+		ens.push_front(barycentre);
 		return Intersection(1,ens);
 	}
 	// Pas de point

@@ -3,10 +3,14 @@
  *
  *  Created on: 15 févr. 2011
  */
+
 #include "Constantes.cpp"
+
 #include "Plan.h"
 #include "Sphere.h"
 #include <math.h>
+
+using namespace std;
 
 Sphere::Sphere() {}
 
@@ -83,7 +87,7 @@ Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	else{
 		for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
 			if (this->appartient(*it)){
-				s.pushFront(*it);
+				s.push_front(*it);
 				k++;
 			}
 		}
