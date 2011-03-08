@@ -24,8 +24,8 @@ Mol::~Mol() {
 }
 
 /**
- * Surcharge de l'oprateur [] pour un accs direct aux noeuds d'un objet mol
- * @param i index du noeud dans la molcule
+ * Surcharge de l'opï¿½rateur [] pour un accï¿½s direct aux noeuds d'un objet mol
+ * @param i index du noeud dans la molï¿½cule
  */
 Noeud* Mol::operator[](int i)
 {
@@ -34,8 +34,8 @@ Noeud* Mol::operator[](int i)
 
 
 /**
- *export du graphe construit ˆ l'aide de l'objet mol courant
- *@return une chaine de caractres qui liste d'abord l'ensemble des noeuds qui forme la molcule puis la liste des liens existants entre deux donns en indiquant les noeuds concerns et la distance entre eux
+ *export du graphe construit ï¿½ l'aide de l'objet mol courant
+ *@return une chaine de caractï¿½res qui liste d'abord l'ensemble des noeuds qui forme la molï¿½cule puis la liste des liens existants entre deux donnï¿½s en indiquant les noeuds concernï¿½s et la distance entre eux
  *
  */
 string Mol::exporterGraphe() {
@@ -56,9 +56,9 @@ string Mol::exporterGraphe() {
 }
 
 /**
- * Importe un fichier PDB et cre les liens de voisinage entre les noeuds de la molcule
- * @param path fichier .PDB ˆ traiter
- * @return Un objet Mol correspondant au fichier import
+ * Importe un fichier PDB et crï¿½e les liens de voisinage entre les noeuds de la molï¿½cule
+ * @param path fichier .PDB ï¿½ traiter
+ * @return Un objet Mol correspondant au fichier importï¿½
  */
 Mol Mol::importerPDB(string path) {
 	Mol mol;
@@ -125,8 +125,8 @@ Mol Mol::importerPDB(string path) {
 }
 
 /**
- * Cre un objet Mol ˆ partir d'un fichier de donnes
- * @param path adresse d'un fichier de donnes
+ * CrÃ©e un objet Mol Ã  partir d'un fichier de donnÃ©es
+ * @param path adresse d'un fichier de donnÃ©es
  */
 Mol Mol::importerGraphe(string path) {
 	Mol mol;
@@ -176,7 +176,7 @@ Mol Mol::importerGraphe(string path) {
 }
 /**
  * Export du fichier mol sous format .xyz
- * @return une chaine de caractres qui ˆ chaque noeud associe son index et ses coordonnes
+ * @return une chaine de caractÃ¨res qui Ã  chaque noeud associe son index et ses coordonnÃ©es
  */
 string Mol::exporterXYZ() {
 	stringstream out;
@@ -193,7 +193,7 @@ string Mol::exporterXYZ() {
 }
 
 /**
- * Ajoute le noeud n ˆ la molcule courante
+ * Ajoute le noeud n Ã  la molÃ©cule courante
  * @param n noeud d'index n
  */
 void Mol::insert(Noeud* n) {
@@ -201,14 +201,14 @@ void Mol::insert(Noeud* n) {
 }
 
 /**
- * @return le nombre de noeuds de la molcule
+ * @return le nombre de noeuds de la molÃ©cule
  */
 int Mol::size() {
 	return noeuds.size();
 }
 
 /**
- *Parcours des noeuds de la molcule, utilis pour allger les notations dans d'autres fonctions
+ *Parcours des noeuds de la molÃ©cule, utilisÃ© pour allÃ©ger les notations dans les autres fonctions du programme
  *
  */
 Noeud* Mol::reset() {
