@@ -9,11 +9,20 @@
 #include <list>
 #include "Intersection.h"
 
-Intersection::Intersection() {
-	// TODO Auto-generated constructor stub
+Intersection::Intersection() {}
 
+Intersection::~Intersection() {}
+
+Intersection::Intersection(int n, std::list<Point> points){
+	this->nombre = n;
+	this->points = points;
 }
 
-Intersection::~Intersection() {
-	// TODO Auto-generated destructor stub
+int Intersection::getNombre(void){
+	return this->nombre;
 }
+std::list<Point> Intersection::getPoints(void){
+	return this->points;
+}
+
+
