@@ -132,19 +132,24 @@ Intersection Noeud::trouverIntersection(void) {
 			else if (i==3){
 				s3=Sphere ((*it).first->getCoord(),(*it).second);
 				i++;
-				cout << getCompteur() << " noeud " << index;int a; cin >> a;
+				cout << getCompteur() << " noeud " << index;
 				if(getCompteur()==3){
 					return s1.intersectionTroisSpheres (s2, s3);
 				}
 			}
 			else if (i==4){
-				cout << getCompteur() << " noeud " << index;int a; cin >> a;
+				cout << getCompteur() << " noeud " << index;
 				s4=Sphere ((*it).first->getCoord(),(*it).second);
 				break;
 			}
 		}
 	}
 	// s4 est vide ?
+	cout << "4sph"; int a; cin>>a;
+	cout<< "[ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
+	cout<< "[ " << s2.getCentre().toString() << " ; " << s2.getRayon() <<" ]  _  " <<endl;
+	cout<< "[ " << s3.getCentre().toString() << " ; " << s3.getRayon() <<" ]  _  " <<endl;
+	cout<<"[ " << s4.getCentre().toString() << " ; " << s4.getRayon() <<" ]  _  " <<endl;
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
 
 }

@@ -5,10 +5,11 @@
  */
 
 #include "Constantes.cpp"
-
+#include <sstream>
 #include "Plan.h"
 #include "Sphere.h"
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -80,6 +81,12 @@ Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	std::list<Point> s = std::list<Point>();
 	int k = 0;
 	Intersection E = t.intersectionTroisSpheres(u,v);
+	std::cout << "taille" << E.getPoints().size();
+	std::cout << "taille" << E.getNombre();
+	std::cout << "troisSpheres"; int a; std::cin >> a;
+	for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
+		cout <<(*it).toString();
+	}
 	int Card = E.getNombre();
 	if (Card==0){
 		return E;
@@ -111,6 +118,12 @@ void Sphere::setCentre(Point centre){
 }
 void Sphere::setRayon(double d){
 	this->rayon = d;
+}
+
+string Sphere::toString(void){
+	stringstream out;
+	out << "[ " << centre.toString() << " ; " << rayon << " ]";
+	return out.str();
 }
 
 

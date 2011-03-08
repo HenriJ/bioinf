@@ -18,7 +18,7 @@ public:
 	virtual ~Intersection();
 
 	int getNombre(void);
-	std::list<Point> getPoints(void);
+	std::list<Point> &getPoints(void);
 
 private:
 	int nombre;

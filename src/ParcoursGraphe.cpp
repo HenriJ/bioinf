@@ -49,7 +49,7 @@ bool ParcoursGraphe::anticiper (int i, int k){
 			if (n->getCompteur()==4&& res){
 
 				Intersection inter=n->trouverIntersection();
-				cout <<  " boup " <<inter.getNombre(); cin >> a;
+				cout <<  " boup " <<inter.getNombre();int a; cin >> a;
 				if (inter.getNombre()==1 ){
 
 					Point p=*(inter.getPoints().begin());
@@ -112,18 +112,29 @@ void  ParcoursGraphe::placer (int i){
 		}
 
 		// Barycentre des centres des sphères
-		Point axe = s1.getCentre().moins(s2.getCentre());
-		double X = ( s1.getRayon() * s1.getCentre().getX() + s2.getRayon() * s2.getCentre().getX() ) / axe.norme();
-		double Y = ( s1.getRayon() * s1.getCentre().getY() + s2.getRayon() * s2.getCentre().getY() ) / axe.norme();
-		double Z = ( s1.getRayon() * s1.getCentre().getZ() + s2.getRayon() * s2.getCentre().getZ() ) / axe.norme();
+		double somme = s1.getRayon() + s2.getRayon();
+		double X = ( s2.getRayon() * s1.getCentre().getX() + s1.getRayon() * s2.getCentre().getX() ) / somme;
+		double Y = ( s2.getRayon() * s1.getCentre().getY() + s1.getRayon() * s2.getCentre().getY() ) / somme;
+		double Z = ( s2.getRayon() * s1.getCentre().getZ() + s1.getRayon() * s2.getCentre().getZ() ) / somme;
 		Point baryCentre = Point(X,Y,Z);
 
 		// Rayon du cercle intersection
 		double d = pow(s1.getRayon(), 2) - pow( (baryCentre.moins(s1.getCentre())).norme() , 2) ;
 
+
+// CONSIDERER LE CAS OU LE BARYCENTRE N'EST PAS DANS LE SEGMENT...
+
+
 		if(d>=0){
 			double rayonCercle = sqrt(d);
 			Point p=Point(0,rayonCercle,baryCentre.getZ());
+
+			cout << endl;
+			cout << s1.toString() << endl;
+			cout << s2.toString() << endl;
+			cout << p.toString()  << endl;
+
+
 			noeuds[3]->affecter(p);
 			anticiper(i,i);
 			placer(i+1);
@@ -149,7 +160,9 @@ void  ParcoursGraphe::placer (int i){
 					cout <<  " anticiper " ; cin >> a;
 					placer(i+1);
 				}
+				cout << "FIN ANTICIPATION " << i;
 				desanticiper(i);
+				cout << "FIN DESANTICIPATION " << i;
 				it++;
 			}
 		}

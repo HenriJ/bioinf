@@ -21,7 +21,7 @@ Intersection::Intersection(int n, std::list<Point> points){
 int Intersection::getNombre(void){
 	return this->nombre;
 }
-std::list<Point> Intersection::getPoints(void){
+std::list<Point> &Intersection::getPoints(void){
 	return this->points;
 }
 
