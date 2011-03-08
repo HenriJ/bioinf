@@ -23,7 +23,7 @@ Mol::~Mol() {
 
 }
 
-Noeud& Mol::operator[](int i)
+Noeud* Mol::operator[](int i)
 {
 	return noeuds[i];
 }
@@ -32,12 +32,12 @@ string Mol::exporterGraphe() {
 	stringstream out_noeuds;
 	stringstream out_liens;
 
-	for (map<int, Noeud>::iterator it = noeuds.begin() ; it != noeuds.end(); ++it) {
-		Noeud& n(it->second);
-		out_noeuds << "N " << n.getIndex() << " " << n.getStringType() << endl;
+	for (map<int, Noeud*>::iterator it = noeuds.begin() ; it != noeuds.end(); ++it) {
+		Noeud* n = it->second;
+		out_noeuds << "N " << n->getIndex() << " " << n->getStringType() << endl;
 
-		for (map<double, Noeud>::iterator sub = n.getVoisins().begin() ; sub != n.getVoisins().end(); ++sub) {
-			out_liens << "L " << n.getIndex() << " " << sub->first << " " << sub->second.getIndex() << endl;
+		for (map<Noeud*, double>::iterator sub = n->getVoisins().begin() ; sub != n->getVoisins().end(); ++sub) {
+			out_liens << "L " << n->getIndex() << " " << sub->second << " " << sub->first->getIndex() << endl;
 		}
 	}
 
@@ -95,7 +95,7 @@ Mol Mol::importerPDB(string path) {
 				P=new Point(cor1,cor2,cor3);
 				NN=new Noeud(counterm, AT);
 				NN->setCoord(*P);
-				mol.insert(*NN);
+				mol.insert(NN);
 				Bb=false;
 			}
 		}
@@ -103,8 +103,8 @@ Mol Mol::importerPDB(string path) {
 
 	for(int i=1; i <= counterm; i++) {
 		for(int j=i; j <= counterm; j++) {
-			if(j>i && (mol[j].getCoord().dist(mol[i].getCoord()) < Constantes::voisinage)) {
-				mol[i].addVoisin(mol[j]);
+			if(j>i && (mol[j]->getCoord().dist(mol[i]->getCoord()) < Constantes::voisinage)) {
+				mol[i]->addVoisin(mol[j]);
 			}
 		}
 	}
@@ -120,14 +120,13 @@ Mol Mol::importerGraphe(string path) {
 
 	ifstream grapheFile(path.c_str());
 
-	while (!grapheFile.eof() ) {
-		char buf[80] = {0}; // 80 charactères devraient suffire
-
+	char buf[80] = {0};
+	while (!grapheFile.eof()) {
 		grapheFile.getline( buf, sizeof( buf ) );
+		string buf1(buf);
+		istringstream istr(buf1);
 
-		istringstream istr(string(buf), ios_base::out);
-
-		char type;
+		char type = ' ';
 		istr.get(type); // On regarde si on charge un noeud ou un lien
 		istr.get(); // On consomme l'espace suivant aussi.
 
@@ -147,7 +146,7 @@ Mol Mol::importerGraphe(string path) {
 				atom = Noeud::N;
 			}
 
-			Noeud n(index, atom);
+			Noeud* n = new Noeud(index, atom);
 			mol.insert(n);
 		} else if (type == 'L') {
 			int indexA, indexB;
@@ -155,8 +154,8 @@ Mol Mol::importerGraphe(string path) {
 
 			istr >> indexA >> dist >> indexB;
 
-			mol[indexA].addVoisin(mol[indexB]);
-			mol[indexB].addVoisin(mol[indexA]);
+			mol[indexA]->addVoisin(dist, mol[indexB]);
+			mol[indexB]->addVoisin(dist, mol[indexA]);
 		}
 	}
 
@@ -171,24 +170,28 @@ string Mol::exporterXYZ() {
 	out << "This geometry optimized by G92;  MP2/6-31G* \n";
 
 	for (int i=1;i<=a;i++){
-		out << noeuds[i].getStringType() << " " << noeuds[i].getCoord().getX() << " "<< noeuds[i].getCoord().getY() << " "<< noeuds[i].getCoord().getZ() << "\n" ;
+		out << noeuds[i]->getStringType() << " " << noeuds[i]->getCoord().getX() << " "<< noeuds[i]->getCoord().getY() << " "<< noeuds[i]->getCoord().getZ() << "\n" ;
 	}
 
 	return out.str();
 }
 
-void Mol::insert(Noeud& n) {
-	noeuds.insert(pair<int, Noeud>(n.getIndex(), n));
+void Mol::insert(Noeud* n) {
+	noeuds.insert(pair<int, Noeud*>(n->getIndex(), n));
+}
+
+int Mol::size() {
+	return noeuds.size();
 }
 
 Noeud* Mol::reset() {
 	internalIterator = noeuds.begin();
-	return &((internalIterator)->second);
+	return internalIterator->second;
 }
 
 Noeud* Mol::next() {
 	if (internalIterator != noeuds.end()) {
-		return &((internalIterator++)->second);
+		return (internalIterator++)->second;
 	}
 	return NULL;
 }

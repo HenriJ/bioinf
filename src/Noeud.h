@@ -32,7 +32,7 @@ class Noeud{
 	int   getCompteur(void);
 	std::string getStringType();
 
-	std::map<double, Noeud> &getVoisins();
+	std::map<Noeud*, double> &getVoisins();
 	Noeud* next();
 	std::string getStringVoisins();
 
@@ -41,8 +41,8 @@ class Noeud{
 
 	void unPlaced();
 
-	void addVoisin(double dist, Noeud &n);
-	void addVoisin(Noeud &n);
+	void addVoisin(double dist, Noeud *n);
+	void addVoisin(Noeud *n);
 
 	void incrCompteur(void);
 	void decrCompteur(void);
@@ -65,7 +65,7 @@ class Noeud{
 	// Donne le nombre de voisins du noeud déjà placés
 	int compteur;
 	// Voisins du noeud
-	std::map<double, Noeud> voisins;
+	std::map<Noeud*, double> voisins;
 	// Position de l'atome
 	Point coord;
 

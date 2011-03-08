@@ -41,23 +41,23 @@ double Point::dist(Point p) {
 }
 
 Point Point::moins(Point p){
-	double X = this->getX() - p.getX();
-	double Y = this->getY() - p.getY();
-	double Z = this->getZ() - p.getZ();
+	double X = x - p.getX();
+	double Y = y - p.getY();
+	double Z = z - p.getZ();
 	return Point(X,Y,Z);
 }
 
 Point Point::plus(Point p){
-	double X = this->getX() + p.getX();
-	double Y = this->getY() + p.getY();
-	double Z = this->getZ() + p.getZ();
+	double X = x + p.getX();
+	double Y = y + p.getY();
+	double Z = z + p.getZ();
 	return Point(X,Y,Z);
 }
 
 Point Point::foisScalaire(double d){
-	double X = this->getX() * d;
-	double Y = this->getY() * d;
-	double Z = this->getZ() * d;
+	double X = x * d;
+	double Y = y * d;
+	double Z = z * d;
 	return Point(X,Y,Z);
 }
 

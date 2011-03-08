@@ -1,11 +1,11 @@
-#ifndef CONSTANTES_H_
-#define CONSTANTES_H_
+#ifndef CONSTANTES_CPP_
+#define CONSTANTES_CPP_
 
 namespace Constantes
 {
-	double voisinage = 5;
-	double EPSILON = 0.01;
+	extern double voisinage;
+	extern double EPSILON;
 }
 
 
-#endif /* CONSTANTES_H_ */
+#endif /* CONSTANTES_CPP_ */

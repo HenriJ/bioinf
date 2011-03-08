@@ -12,7 +12,14 @@
 #include <sstream>
 #include "../Noeud.h"
 #include "../Mol.h"
+#include "../ParcoursGraphe.h"
 using namespace std;
+
+namespace Constantes
+{
+	double voisinage = 6;
+	double EPSILON = 0.01;
+}
 
 int main(int argc, char *argv[]) {
 	std::string path = "mol.graphe";
@@ -32,12 +39,11 @@ int main(int argc, char *argv[]) {
 	 * absolu des atomes.
 	 */
 
+	ParcoursGraphe parcours(mol);
+	parcours.placer(1);
 
+//	cout << mol[1]->getStringVoisins();
 
-	/*
-	 * Exporte la molécule au format XYZ
-	 */
-	//cout << mol.exporterXYZ();
 
 	return 0;
 }

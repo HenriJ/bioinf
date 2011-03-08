@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Noeud.h"
 
 
@@ -56,15 +57,15 @@ string Noeud::getStringType() {
 	return "0";
 }
 
-map<double, Noeud> &Noeud::getVoisins() {
+map<Noeud*, double> &Noeud::getVoisins() {
 	return voisins;
 }
 
 string Noeud::getStringVoisins() {
 	stringstream out;
 
-	for (map<double, Noeud>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
-		out << it->first << ","  << it->second.getIndex() << " ";
+	for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
+		out << it->second << ","  << it->first->getIndex() << " ";
 	}
 
 	return out.str();
@@ -95,12 +96,12 @@ void Noeud::unPlaced(){
 	placed=false;
 }
 
-void Noeud::addVoisin(double dist, Noeud &n) {
-	voisins.insert(pair<double, Noeud>(dist, n));
+void Noeud::addVoisin(double dist, Noeud *n) {
+	voisins.insert(pair<Noeud*, double>(n, dist));
 }
 
-void Noeud::addVoisin(Noeud &n) {
-	addVoisin(coord.dist(n.coord), n);
+void Noeud::addVoisin(Noeud *n) {
+	addVoisin(coord.dist(n->coord), n);
 }
 
 void Noeud::incrCompteur() {
@@ -118,29 +119,32 @@ Intersection Noeud::trouverIntersection(void) {
 	Sphere s3;
 	Sphere s4;
 	int i=1;
-	for (map<double, Noeud>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
-		if ((*it).second.isPlaced()){
+	for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
+		if ((*it).first->isPlaced()){
 			if (i==1){
-				s1=Sphere ((*it).second.getCoord(),(*it).first);
+				s1=Sphere ((*it).first->getCoord(),(*it).second);
 				i++;
 			}
-			if (i==2){
-				s2=Sphere ((*it).second.getCoord(),(*it).first);
+			else if (i==2){
+				s2=Sphere ((*it).first->getCoord(),(*it).second);
 				i++;
 			}
-			if (i==3){
-				s3=Sphere ((*it).second.getCoord(),(*it).first);
+			else if (i==3){
+				s3=Sphere ((*it).first->getCoord(),(*it).second);
 				i++;
+				cout << getCompteur() << " noeud " << index;int a; cin >> a;
 				if(getCompteur()==3){
 					return s1.intersectionTroisSpheres (s2, s3);
 				}
 			}
-			if (i==4){
-				s4=Sphere ((*it).second.getCoord(),(*it).first);
+			else if (i==4){
+				cout << getCompteur() << " noeud " << index;int a; cin >> a;
+				s4=Sphere ((*it).first->getCoord(),(*it).second);
 				break;
 			}
 		}
 	}
+	// s4 est vide ?
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
 
 }

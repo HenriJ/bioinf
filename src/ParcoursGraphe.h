@@ -15,14 +15,14 @@
 #include <iostream>
 #include"Noeud.h"
 #include <set>
+#include "Mol.h"
 using namespace std;
 
 class ParcoursGraphe{
 
 
 public:
-	ParcoursGraphe(){}
-	ParcoursGraphe(std::string s);
+	ParcoursGraphe(Mol noeuds);
 	void placer (int i);
 	bool anticiper (int i, int k);
 	void desanticiper(int i);
@@ -30,7 +30,7 @@ public:
 
 
 private:
-	map<int, Noeud> noeuds;
+	Mol noeuds;
 	map<int, set<int> > anticipation;
 };
 

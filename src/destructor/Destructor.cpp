@@ -17,6 +17,12 @@
 
 using namespace std;
 
+namespace Constantes
+{
+	double voisinage = 6;
+	double EPSILON = 0.01;
+}
+
 int main(int argc, char *argv[]) {
 	std::string path = "mol.pdb";
 
