@@ -3,7 +3,7 @@
  *
  *  Created on: 15 févr. 2011
  */
-#include "Constantes.h"
+#include "Constantes.cpp"
 #include "Plan.h"
 #include "Sphere.h"
 #include <math.h>
