@@ -24,8 +24,8 @@ Mol::~Mol() {
 }
 
 /**
- * Surcharge de l'op�rateur [] pour un acc�s direct aux noeuds d'un objet mol
- * @param i index du noeud dans la mol�cule
+ * Surcharge de l'opérateur [] pour un accés direct aux noeuds d'un objet mol
+ * @param i index du noeud dans la molécule
  */
 Noeud* Mol::operator[](int i)
 {
@@ -34,9 +34,10 @@ Noeud* Mol::operator[](int i)
 
 
 /**
- *export du graphe construit � l'aide de l'objet mol courant
- *@return une chaine de caract�res qui liste d'abord l'ensemble des noeuds qui forme la mol�cule puis la liste des liens existants entre deux donn�s en indiquant les noeuds concern�s et la distance entre eux
- *
+ * Export du graphe construit à l'aide de l'objet mol courant
+ * @return une chaine de caractéres qui liste d'abord l'ensemble des noeuds
+ *         qui forme la molécule puis la liste des liens existants entre deux
+ *         donnés en indiquant les noeuds concernés et la distance entre eux
  */
 string Mol::exporterGraphe() {
 	stringstream out_noeuds;
@@ -56,9 +57,9 @@ string Mol::exporterGraphe() {
 }
 
 /**
- * Importe un fichier PDB et cr�e les liens de voisinage entre les noeuds de la mol�cule
- * @param path fichier .PDB � traiter
- * @return Un objet Mol correspondant au fichier import�
+ * Importe un fichier PDB et crée les liens de voisinage entre les noeuds de la molécule
+ * @param path fichier .PDB é traiter
+ * @return Un objet Mol correspondant au fichier importé
  */
 Mol Mol::importerPDB(string path) {
 	Mol mol;
