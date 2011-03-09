@@ -45,11 +45,9 @@ bool ParcoursGraphe::anticiper (int i, int k){
 		Noeud* n = it1->first;
 		n->incrCompteur();
 		if (!(n->isPlaced())){
-			cout <<  " bo ";
-			if (n->getCompteur()==4&& res){
+			if (n->getCompteur()==4 && res){
 
 				Intersection inter=n->trouverIntersection();
-				cout <<  " boup " <<inter.getNombre();int a; cin >> a;
 				if (inter.getNombre()==1 ){
 
 					Point p=*(inter.getPoints().begin());
@@ -59,7 +57,7 @@ bool ParcoursGraphe::anticiper (int i, int k){
 						res= false;
 					}
 				}
-				else{
+				else if (inter.getNombre() ==0 ){
 					res= false;
 				}
 			}
@@ -74,8 +72,10 @@ bool ParcoursGraphe::anticiper (int i, int k){
  * s'appelle elle meme sur le noeud i+1, et revient au point de départ
  */
 void  ParcoursGraphe::placer (int i){
+	cout << "debut";
 	if(i==1){
-		Point p=Point(0,0,0);
+		// Point p=Point(0,0,0);
+		Point p = Point (-18.709, -35.5, -0.007);
 		noeuds[i]->affecter(p);
 		anticiper(i,i);
 		placer(i+1);
@@ -84,7 +84,8 @@ void  ParcoursGraphe::placer (int i){
 		map<Noeud*, double> voisins=noeuds[1]->getVoisins();
 		for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
 			if ((*it).first->getIndex()==2){
-				Point p=Point(0,0,(*it).second);
+				// Point p=Point(0,0,(*it).second);
+				Point p = Point(-19.164, -35.301, 1.410);
 				noeuds[i]->affecter(p);
 				break;
 			}
@@ -111,30 +112,24 @@ void  ParcoursGraphe::placer (int i){
 			}
 		}
 
+		// axe s1 - s2
+		Point axe = s2.getCentre().moins(s1.getCentre());
+		// Distance algébrique de s2.centre au barycentre
+		double BG = ( pow(s1.getRayon(), 2) - pow(s2.getRayon(), 2) - pow( axe.norme() , 2) ) / (2 * pow( axe.norme(), 2)) ;
 		// Barycentre des centres des sphères
-		double somme = s1.getRayon() + s2.getRayon();
-		double X = ( s2.getRayon() * s1.getCentre().getX() + s1.getRayon() * s2.getCentre().getX() ) / somme;
-		double Y = ( s2.getRayon() * s1.getCentre().getY() + s1.getRayon() * s2.getCentre().getY() ) / somme;
-		double Z = ( s2.getRayon() * s1.getCentre().getZ() + s1.getRayon() * s2.getCentre().getZ() ) / somme;
-		Point baryCentre = Point(X,Y,Z);
+		Point baryCentre = s2.getCentre().plus(axe.foisScalaire(BG));
 
 		// Rayon du cercle intersection
 		double d = pow(s1.getRayon(), 2) - pow( (baryCentre.moins(s1.getCentre())).norme() , 2) ;
 
 
-// CONSIDERER LE CAS OU LE BARYCENTRE N'EST PAS DANS LE SEGMENT...
+		// CONSIDERER LE CAS OU LE BARYCENTRE N'EST PAS DANS LE SEGMENT...
 
 
 		if(d>=0){
-			double rayonCercle = sqrt(d);
-			Point p=Point(0,rayonCercle,baryCentre.getZ());
-
-			cout << endl;
-			cout << s1.toString() << endl;
-			cout << s2.toString() << endl;
-			cout << p.toString()  << endl;
-
-
+			// double rayonCercle = sqrt(d);
+			// Point p=Point(0,rayonCercle,baryCentre.getZ());
+			Point p = Point(-18.27, -36.021, 2.403);
 			noeuds[3]->affecter(p);
 			anticiper(i,i);
 			placer(i+1);
@@ -153,16 +148,15 @@ void  ParcoursGraphe::placer (int i){
 			int m=inter.getNombre(); //normalement, m=1 ou m=2
 			std::list<Point>::iterator it=inter.getPoints().begin();
 			for( int k=0; k<m;k++){
-				cout << " Noeud " << i << "essai" << k;int a; cin >> a;
+				cout << " Noeud " << i << "  --  essai " << k << endl;int a; cin >> a;
 				Point p=*it;
 				noeuds[i]->affecter(p);
 				if (anticiper(i,i)){
-					cout <<  " anticiper " ; cin >> a;
 					placer(i+1);
 				}
-				cout << "FIN ANTICIPATION " << i;
+				cout << "FIN ANTICIPATION " << i << endl;
 				desanticiper(i);
-				cout << "FIN DESANTICIPATION " << i;
+				cout << "FIN DESANTICIPATION " << i << endl;
 				it++;
 			}
 		}

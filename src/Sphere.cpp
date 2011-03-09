@@ -33,15 +33,17 @@ double Sphere::getRayon(void){
  * Calcule l'intersection de deux sphères. Si elle n'existe pas, rend un cercle de rayon -1
  */
 Cercle Sphere::intersectionSphere(Sphere s){
-	Point axe = centre.moins(s.getCentre());
-	double X = ( this->getRayon() * this->getCentre().getX() + s.getRayon() * s.getCentre().getX() ) / axe.norme();
-	double Y = ( this->getRayon() * this->getCentre().getY() + s.getRayon() * s.getCentre().getY() ) / axe.norme();
-	double Z = ( this->getRayon() * this->getCentre().getZ() + s.getRayon() * s.getCentre().getZ() ) / axe.norme();
-	Point baryCentre = Point(X,Y,Z);
+	// axe this - s
+	Point axe = s.getCentre().moins(centre);
+	// Distance algébrique de s2.centre au barycentre
+	double BG = ( pow(rayon, 2) - pow(s.getRayon(), 2) - pow( axe.norme() , 2) ) / (2 * pow( axe.norme(), 2)) ;
+	// Barycentre des centres des sphères
+	Point baryCentre = s.getCentre().plus(axe.foisScalaire(BG));
+	// Rayon du cercle intersection
+	double d = pow(rayon, 2) - pow( (baryCentre.moins(centre)).norme() , 2) ;
 
 	Plan p = Plan(axe, baryCentre);
 
-	double d = pow(this->getRayon(), 2) - pow( (baryCentre.moins(this->getCentre()) ).norme() , 2) ;
 	if(d>=0){
 		double rayonCercle = sqrt(d);
 		return Cercle(baryCentre, rayonCercle, p);
@@ -81,12 +83,11 @@ Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	std::list<Point> s = std::list<Point>();
 	int k = 0;
 	Intersection E = t.intersectionTroisSpheres(u,v);
-	std::cout << "taille" << E.getPoints().size();
-	std::cout << "taille" << E.getNombre();
-	std::cout << "troisSpheres"; int a; std::cin >> a;
+	/*
 	for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
 		cout <<(*it).toString();
 	}
+	*/
 	int Card = E.getNombre();
 	if (Card==0){
 		return E;

@@ -32,6 +32,8 @@ class Point{
 	Point vectoriel(Point p);
 	double norme();
 
+	void arrondi(void);
+
 	std::string toString();
 
 

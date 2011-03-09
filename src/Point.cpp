@@ -77,6 +77,21 @@ double Point::norme(){
 	return this->dist(Zero);
 }
 
+void Point::arrondi(void){
+	// Pour x
+	double X = 1000 * x + 0.5;
+	int XX = floor(X);
+	x = ((double)XX) /1000;
+	// Pour y
+	double Y = 1000 * y + 0.5;
+	int YY = floor(Y);
+	y = ((double)YY) /1000;
+	// Pour z
+	double Z = 1000 * z + 0.5;
+	int ZZ = floor(Z);
+	z = ((double)ZZ) /1000;
+}
+
 string Point::toString() {
 	stringstream out;
 	out << "[" << x << ", " << y << ", " << z << "]";

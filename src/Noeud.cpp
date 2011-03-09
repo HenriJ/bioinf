@@ -129,8 +129,10 @@ void Noeud::setCoord(Point& p) {
 * @param p Coordonnées
 */
 void Noeud::affecter(Point& P) {
+	P.arrondi();
 	setCoord(P);
 	setPlaced();
+	cout << " Noeud n°" << index << " <- " << P.toString() << endl;
 }
 
 /**
@@ -179,11 +181,10 @@ void Noeud::decrCompteur() {
 	compteur--;
 }
 
-/**
-* TODO
-*/
+
 Intersection Noeud::trouverIntersection(void) {
 
+	int v1, v2, v3, v4;
 	Sphere s1;
 	Sphere s2;
 	Sphere s3;
@@ -193,33 +194,54 @@ Intersection Noeud::trouverIntersection(void) {
 		if ((*it).first->isPlaced()){
 			if (i==1){
 				s1=Sphere ((*it).first->getCoord(),(*it).second);
+				v1 = (*it).first->getIndex();
 				i++;
 			}
 			else if (i==2){
 				s2=Sphere ((*it).first->getCoord(),(*it).second);
+				v2 = (*it).first->getIndex();
 				i++;
 			}
 			else if (i==3){
 				s3=Sphere ((*it).first->getCoord(),(*it).second);
+				v3 = (*it).first->getIndex();
 				i++;
-				cout << getCompteur() << " noeud " << index;
 				if(getCompteur()==3){
 					return s1.intersectionTroisSpheres (s2, s3);
 				}
 			}
 			else if (i==4){
-				cout << getCompteur() << " noeud " << index;
 				s4=Sphere ((*it).first->getCoord(),(*it).second);
+				v4 = (*it).first->getIndex();
 				break;
 			}
 		}
 	}
 	// s4 est vide ?
-	cout << "4sph"; int a; cin>>a;
-	cout<< "[ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
-	cout<< "[ " << s2.getCentre().toString() << " ; " << s2.getRayon() <<" ]  _  " <<endl;
-	cout<< "[ " << s3.getCentre().toString() << " ; " << s3.getRayon() <<" ]  _  " <<endl;
-	cout<<"[ " << s4.getCentre().toString() << " ; " << s4.getRayon() <<" ]  _  " <<endl;
+
+	Intersection inter = s1.intersectionQuatreSpheres( s2, s3, s4);
+	if( inter.getNombre() == 0){
+		cout << endl << " INTERSECTION VIDE : " << endl;
+		int a; cin>>a; cout << endl;
+		cout<< "Noeud n°" << v1 << " : [ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v2 << " : [ " << s2.getCentre().toString() << " ; " << s2.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v3 << " : [ " << s3.getCentre().toString() << " ; " << s3.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v4 << " : [ " << s4.getCentre().toString() << " ; " << s4.getRayon() <<" ]  _  " <<endl;
+		cout << "Sur le noeud : " << index << endl;
+	}
+
+	if( inter.getNombre() > 1){
+		cout << endl << " INTERSECTIONS TROP NOMBREUSES : ( " << inter.getNombre() << " )" << endl;
+		int a; cin>>a; cout << endl;
+		cout<< "Noeud n°" << v1 << " : [ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v2 << " : [ " << s2.getCentre().toString() << " ; " << s2.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v3 << " : [ " << s3.getCentre().toString() << " ; " << s3.getRayon() <<" ]  _  " <<endl;
+		cout<< "Noeud n°" << v4 << " : [ " << s4.getCentre().toString() << " ; " << s4.getRayon() <<" ]  _  " <<endl;
+		cout << "Sur le noeud : " << index << endl;
+		for (list<Point>::iterator it = inter.getPoints().begin() ; it != inter.getPoints().end() ; it++){
+			cout << "Point : " << (*it).toString() <<endl;
+		}
+	}
 	return s1.intersectionQuatreSpheres( s2, s3, s4);
 
 }
