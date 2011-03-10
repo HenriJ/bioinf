@@ -79,40 +79,39 @@ Intersection Sphere::intersectionTroisSpheres(Sphere t, Sphere u){
 	return ( this->intersectionCercle(t.intersectionSphere(u)));
 }
 
+Intersection Sphere::intersectionTroisSpheresArrondi(Sphere t, Sphere u){
+	Intersection E = intersectionTroisSpheres(t,u);
+	Sphere v;
+	return choisir(t, u, v, E, 3);
+}
+
 Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	std::list<Point> s = std::list<Point>();
 	int k = 0;
 	Intersection E = t.intersectionTroisSpheres(u,v);
-	/*
-	for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
-		cout <<(*it).toString();
-	}
-	*/
 	int Card = E.getNombre();
 	if (Card==0){
 		return E;
 	}
 	else{
 		for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
+			//cout << "Point : " << (*it).toString() << endl;
 			if (this->appartient(*it)){
 				s.push_front(*it);
 				k++;
 			}
 		}
-		return Intersection(k,s);
+		return choisir( t, u, v, Intersection(k,s), 4);
 	}
 }
 
 bool Sphere::appartient(Point p){
 	double diff = p.moins(this->getCentre()).norme() - this->getRayon();
-	if ( diff < Constantes::EPSILON && diff > - Constantes::EPSILON){
+	if ( diff < Constantes::EPSILON_APPARTIENT && diff > - Constantes::EPSILON_APPARTIENT){
 		return true;
 	}
 	return false;
 }
-
-
-
 
 void Sphere::setCentre(Point centre){
 	this->centre = centre;
@@ -125,6 +124,44 @@ string Sphere::toString(void){
 	stringstream out;
 	out << "[ " << centre.toString() << " ; " << rayon << " ]";
 	return out.str();
+}
+
+Intersection Sphere::choisir(Sphere t, Sphere u, Sphere v, Intersection E, int k){
+	if (E.getNombre() == 0){
+		return E;
+	}
+	list<Point> ok;
+	int compt = 0;
+	Point meilleur = Point (0,3,6);
+	Point meilleur1= Point (1,4,7);
+	for (list<Point>::iterator it = E.getPoints().begin() ; it != E.getPoints().end() ; it++){
+		list<Point> possibles = (*it).arrondi();
+		double a = 9999.0;
+		for (list<Point>::iterator it2 = possibles.begin() ; it2 != possibles.end() ; it2++){
+			Point p = (*it2);
+			double somme = max (p.moins(centre).norme() - rayon, rayon - p.moins(centre).norme());
+			somme += max (p.moins(t.centre).norme() - t.rayon, t.rayon - p.moins(t.centre).norme());
+			somme += max (p.moins(u.centre).norme() - u.rayon, u.rayon - p.moins(u.centre).norme());
+			if (k==4){
+				somme += max (p.moins(v.centre).norme() - v.rayon, v.rayon - p.moins(v.centre).norme());
+			}
+			if (somme < a){
+				if (compt == 0){
+					meilleur = p;
+				} else {
+					meilleur1 = p;
+				}
+				a = somme;
+			}
+		}
+		compt++;
+	}
+	ok.push_front(meilleur);
+	if (compt>1 && !(meilleur.equals(meilleur1))){
+		ok.push_front(meilleur1);
+	}
+	Intersection rep =  Intersection(ok.size(), ok);
+	return rep;
 }
 
 

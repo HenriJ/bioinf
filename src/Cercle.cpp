@@ -49,7 +49,7 @@ Intersection Cercle::intersectionCercle(Cercle c){
 	std::list<Point> ens = std::list<Point>();
 
 	// Deux points distincts
-	if (distanceCarree > 0 + Constantes::EPSILON ){
+	if (distanceCarree > 0 + pow (Constantes::EPSILON_CERCLES, 2) ){
 		double distance = sqrt(distanceCarree);
 		Point p1 = barycentre.plus(direction.foisScalaire(distance/direction.norme()));
 		Point p2 = barycentre.moins(direction.foisScalaire(distance/direction.norme()));
@@ -58,7 +58,7 @@ Intersection Cercle::intersectionCercle(Cercle c){
 		return Intersection(2,ens);
 	}
 	// Un seul point
-	else if (distanceCarree > - Constantes::EPSILON){
+	else if (distanceCarree > - pow (Constantes::EPSILON_CERCLES, 2)){
 		ens.push_front(barycentre);
 		return Intersection(1,ens);
 	}

@@ -4,7 +4,8 @@
 namespace Constantes
 {
 	extern double voisinage;
-	extern double EPSILON;
+	extern double EPSILON_APPARTIENT;
+	extern double EPSILON_CERCLES;
 }
 
 

@@ -9,9 +9,10 @@
 #ifndef POINT_H_
 #define POINT_H_
 #include <string>
+#include <list>
 
 class Point{
-	public:
+public:
 
 	Point();
 	Point(double x, double y, double z);
@@ -32,12 +33,14 @@ class Point{
 	Point vectoriel(Point p);
 	double norme();
 
-	void arrondi(void);
+	bool equals(Point p);
+
+	std::list<Point> arrondi(void);
 
 	std::string toString();
 
 
-	private:
+private:
 
 	double x,y,z;
 };

@@ -33,8 +33,11 @@ public:
 	Intersection intersectionCercle(Cercle c);
 
 	Intersection intersectionTroisSpheres(Sphere t, Sphere u);
+	Intersection intersectionTroisSpheresArrondi(Sphere t, Sphere u);
 
 	Intersection intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v);
+
+	Intersection choisir(Sphere t, Sphere u, Sphere v, Intersection E, int k);
 
 	bool appartient(Point p);
 

@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <math.h>
+#include <list>
 #include "Point.h"
 
 
@@ -77,23 +78,35 @@ double Point::norme(){
 	return this->dist(Zero);
 }
 
-void Point::arrondi(void){
+list<Point> Point::arrondi(void){
 	// Pour x
-	double X = 1000 * x + 0.5;
-	int XX = floor(X);
-	x = ((double)XX) /1000;
+	double X1 = ( floor ((double) (1000 * x))) / 1000;
+	double X2 = X1 + 0.001;
 	// Pour y
-	double Y = 1000 * y + 0.5;
-	int YY = floor(Y);
-	y = ((double)YY) /1000;
-	// Pour z
-	double Z = 1000 * z + 0.5;
-	int ZZ = floor(Z);
-	z = ((double)ZZ) /1000;
+	double Y1 = ( floor ((double) (1000 * y))) / 1000;
+	double Y2 = Y1 + 0.001;
+	// Pour
+	double Z1 = ( floor ((double) (1000 * z))) / 1000;
+	double Z2 = Z1 + 0.001;
+
+	list<Point> rep = list<Point>();
+	rep.push_front(Point (X1,Y1,Z1));
+	rep.push_front(Point (X1,Y1,Z2));
+	rep.push_front(Point (X1,Y2,Z1));
+	rep.push_front(Point (X2,Y1,Z1));
+	rep.push_front(Point (X1,Y2,Z2));
+	rep.push_front(Point (X2,Y1,Z2));
+	rep.push_front(Point (X2,Y2,Z1));
+	rep.push_front(Point (X2,Y2,Z2));
+	return rep;
 }
 
 string Point::toString() {
 	stringstream out;
 	out << "[" << x << ", " << y << ", " << z << "]";
 	return out.str();
+}
+
+bool Point::equals(Point p){
+	return (p.x==x && p.y==y && p.z==z);
 }

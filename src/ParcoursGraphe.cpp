@@ -13,6 +13,7 @@
 #include <set>
 
 ParcoursGraphe::ParcoursGraphe(Mol noeuds): noeuds(noeuds) {
+	NombreSolutions = 0;
 
 }
 
@@ -141,6 +142,8 @@ void  ParcoursGraphe::placer (int i){
 	}
 	else if (i==(int)(1+noeuds.size())){
 		cout << noeuds.exporterXYZ();
+		NombreSolutions ++;
+		cout << NombreSolutions << " solutions trouvées" << endl;
 	}
 	else{
 		if (!(noeuds[i]->isPlaced())){
@@ -148,7 +151,7 @@ void  ParcoursGraphe::placer (int i){
 			int m=inter.getNombre(); //normalement, m=1 ou m=2
 			std::list<Point>::iterator it=inter.getPoints().begin();
 			for( int k=0; k<m;k++){
-				cout << " Noeud " << i << "  --  essai " << k << endl;int a; cin >> a;
+				cout << " Noeud " << i << "  --  essai " << k << endl;
 				Point p=*it;
 				noeuds[i]->affecter(p);
 				if (anticiper(i,i)){

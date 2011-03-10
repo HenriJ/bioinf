@@ -27,7 +27,7 @@ public:
 	bool anticiper (int i, int k);
 	void desanticiper(int i);
 	void stocker();
-
+	int NombreSolutions;
 
 private:
 	Mol noeuds;
