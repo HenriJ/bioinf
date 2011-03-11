@@ -89,93 +89,26 @@ bool ParcoursGraphe::anticiper (int i, int k){
  * @param i noeuds courant dans le parcours du graphe
  */
 void  ParcoursGraphe::placer (int i){
-	cout << "debut";
-	/*if(i==1){
-		Point p=Point(0,0,0);
-		//Point p = Point (-18.709, -35.5, -0.007);
-		noeuds[i]->affecter(p);
-		anticiper(i,i);
-		placer(i+1);
-	}
-	else if (i==2){
-		map<Noeud*, double> voisins=noeuds[1]->getVoisins();
-		for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
-			if ((*it).first->getIndex()==2){
-				// Point p=Point(0,0,(*it).second);
-				//Point p = Point(-19.164, -35.301, 1.410);
-				Point p = Point(1,0,0);
-				noeuds[i]->affecter(p);
-				break;
-			}
-		}
-		anticiper(i,i);
-		placer(i+1);
+	cout << "debut" << endl;
 
-	}
-	else if (i==3){
-		Sphere s1;
-		Sphere s2;
-		int j=0;
-		map<Noeud*, double> voisins=noeuds[3]->getVoisins();
-		for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
-			if ((*it).first->isPlaced()){
-				if (j==0){
-					s1=Sphere ((*it).first->getCoord(),(*it).second);
-					j++;
-				}
-				else if (j==1){
-					s2=Sphere ((*it).first->getCoord(),(*it).second);
-					break;
-				}
-			}
-		}
-
-		// axe s1 - s2
-		Point axe = s2.getCentre().moins(s1.getCentre());
-		// Distance algébrique de s2.centre au barycentre
-		double BG = ( pow(s1.getRayon(), 2) - pow(s2.getRayon(), 2) - pow( axe.norme() , 2) ) / (2 * pow( axe.norme(), 2)) ;
-		// Barycentre des centres des sphères
-		Point baryCentre = s2.getCentre().plus(axe.foisScalaire(BG));
-
-		// Rayon du cercle intersection
-		double d = pow(s1.getRayon(), 2) - pow( (baryCentre.moins(s1.getCentre())).norme() , 2) ;
-
-
-		// CONSIDERER LE CAS OU LE BARYCENTRE N'EST PAS DANS LE SEGMENT...
-
-
-		if(d>=0){
-			// double rayonCercle = sqrt(d);
-			// Point p=Point(0,rayonCercle,baryCentre.getZ());
-			//Point p = Point(-18.27, -36.021, 2.403);
-			Point p = Point (0,1,0);
-			noeuds[3]->affecter(p);
-			anticiper(i,i);
-			int a; cin>>a;
-			placer(i+1);
-		} else {
-			cout << "erreur : les trois premiers points ne sont pas reliés";
-
-		}
-
-
-	}
-	else*/
 	if (i==1||i==2||i==3){
 		anticiper(i,i);
 		placer (i+1);
 	}
 
 	else if (i==(int)(1+noeuds.size())){
-		cout << noeuds.exporterXYZ();
+		stringstream concat;
+		concat << "sol" << NombreSolutions << ".xyz";
+
+		string path(concat.str());
+		noeuds.exporterXYZ(path);
+
 		NombreSolutions ++;
 		cout << NombreSolutions << " solutions trouvées" << endl;
-
-		//int jj; cin>>jj;
 	}
 	else{
 		if (!(noeuds[i]->isPlaced())){
-			cout << "boup";
+			cout << i << " non-placé" << endl;
 
 			Intersection inter=noeuds[i]->trouverIntersection();
 			int m=inter.getNombre(); //normalement, m=1 ou m=2

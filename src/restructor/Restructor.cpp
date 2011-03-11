@@ -36,15 +36,12 @@ int main(int argc, char *argv[]) {
 
 
 	/*
-	 * TODO: Reconstruction du (ou des) graphe(s) avec positionnement
+	 * Reconstruction du (ou des) graphe(s) avec positionnement
 	 * absolu des atomes.
 	 */
 
 	ParcoursGraphe parcours(mol);
 	parcours.placer(1);
-
-//	cout << mol[1]->getStringVoisins();
-
 
 	return 0;
 }
