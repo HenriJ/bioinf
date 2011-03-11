@@ -1,0 +1,6 @@
+HEADER    TRANSPORT PROTEIN                       13-NOV-08   3F9D              
+ATOM      1  N   PRO A   1      0 0 0  0.60 30.87           N  
+ATOM      2  CA  PRO A   1      1 0 0  0.60 30.50           C  
+ATOM      3  C   PRO A   1      0 1 0  1.00 29.41           C  
+ATOM      8  N   ASN A   2      0 0 1  1.00 27.55           N  
+END                                                                             
