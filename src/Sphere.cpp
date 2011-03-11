@@ -13,8 +13,16 @@
 
 using namespace std;
 
+/**
+ * Constructeur vide
+ */
 Sphere::Sphere() {}
 
+/**
+ * Constructeur à partir d'un point et d'un rayon
+ * @param centre: centre de la sphère
+ * @param rayon: rayon de la sphère
+ */
 Sphere::Sphere(Point centre, double rayon){
 	this->centre = centre;
 	this->rayon = rayon;
@@ -22,15 +30,24 @@ Sphere::Sphere(Point centre, double rayon){
 
 Sphere::~Sphere() {}
 
+/**
+ *retourne le rayon de la sphère courante
+ */
 Point Sphere::getCentre(void){
 	return centre;
 }
+
+/**
+ *retourne le rayon de la sphère courante
+ */
 double Sphere::getRayon(void){
 	return rayon;
 }
 
 /**
- * Calcule l'intersection de deux sphères. Si elle n'existe pas, rend un cercle de rayon -1
+ * Calcule l'intersection de deux sphères
+ * @param s sphere dont on veut calculer l'intersection avec la sphere courante
+ * @return le cercle intersection s'il existe, un cercle de rayon -1 sinon
  */
 Cercle Sphere::intersectionSphere(Sphere s){
 	// axe this - s

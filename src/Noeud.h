@@ -49,7 +49,7 @@ class Noeud{
 
 	std::string toString();
 	void setCoord(Point& P);
-	void affecter(Point& P);
+	bool affecter(Point& P);
 
 	Intersection trouverIntersection(void);
 

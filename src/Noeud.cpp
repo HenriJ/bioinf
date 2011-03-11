@@ -127,11 +127,26 @@ void Noeud::setCoord(Point& p) {
 /**
  * Affecte des coordonnées au noeud et le considère comme placé
  * @param p Coordonnées
+ * @return faux s'il y a ue incohérence avec les voisins déjà placés, vrai sinon
  */
-void Noeud::affecter(Point& P) {
-	setCoord(P);
-	setPlaced();
+bool Noeud::affecter(Point& P) {
+	bool res=true;
+	map<Noeud*, double> voisins=getVoisins();
+	for (map<Noeud*, double>::iterator it=voisins.begin(); it!=voisins.end(); it++){
+		if ((*it).first->isPlaced()){
+			if (!Sphere ((*it).first->getCoord(), (*it).second).appartient(P)){
+				res=false;
+				break;
+			}
+		}
+	}
+	if (res){
+		setCoord(P);
+		setPlaced();
+	}
+
 	cout << " Noeud n°" << index << " <- " << P.toString() << endl;
+	return res;
 }
 
 /**
@@ -219,7 +234,7 @@ Intersection Noeud::trouverIntersection(void) {
 	// s4 est vide ?
 
 	Intersection inter = s1.intersectionQuatreSpheres( s2, s3, s4);
-	if( inter.getNombre() == 0){
+	/*if( inter.getNombre() == 0){
 		cout << endl << " INTERSECTION VIDE : " << endl;
 		cout << endl;
 		cout<< "Noeud n°" << v1 << " : [ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
@@ -240,7 +255,7 @@ Intersection Noeud::trouverIntersection(void) {
 		for (list<Point>::iterator it = inter.getPoints().begin() ; it != inter.getPoints().end() ; it++){
 			cout << "Point : " << (*it).toString() <<endl;
 		}
-	}
+	}*/
 	return inter;
 
 }

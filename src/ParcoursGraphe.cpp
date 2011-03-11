@@ -12,13 +12,19 @@
 #include <map>
 #include <set>
 
+/**
+ * Constructeur par copie d'un objet de type mol
+ * @param noeuds Objet copié pour créer le ParcoursGraphe
+ */
 ParcoursGraphe::ParcoursGraphe(Mol noeuds): noeuds(noeuds) {
 	NombreSolutions = 0;
 
 }
 
 /**
- * cette fonction efface toute trace d'une éventuelle anticipation sur le noeud i
+ * Efface toute trace d'une éventuelle anticipation sur le noeud i, c'est à dire met à faux la
+ * variable placed de tous les noeuds concernés et décrémente les compteurs correspondants
+ * @param i index du noeud sur lequel on veut désanticiper
  */
 void ParcoursGraphe::desanticiper(int i){
 	set<int> settmp=anticipation[i];
@@ -32,8 +38,12 @@ void ParcoursGraphe::desanticiper(int i){
 }
 
 /**
- *  Cette fonction essaye d'anticiper sur les voisins du noeud i, sachant que
- *  le noeud courant est le noeud k
+ *  essaye d'anticiper sur les voisins du noeud i, c'est à dire les place avant leur tour
+ *  s'ils n'ont plus qu'une seule possibilité et stocke cette anticipation comme venant du noeud k
+ *
+ *  @param i index du noeud sur lequel on veut anticiper
+ *  @param k index du noeud courant dans le parcours du graphe
+ *  @return faux si on trouve une incohérence, vrai sinon
  */
 bool ParcoursGraphe::anticiper (int i, int k){
 
@@ -52,10 +62,14 @@ bool ParcoursGraphe::anticiper (int i, int k){
 				if (inter.getNombre()==1 ){
 
 					Point p=*(inter.getPoints().begin());
-					n->affecter(p);
-					anticipation[k].insert(n->getIndex());
-					if (!anticiper(n->getIndex(),k)){
-						res= false;
+					if (n->affecter(p)){
+						anticipation[k].insert(n->getIndex());
+						if (!anticiper(n->getIndex(),k)){
+							res= false;
+						}
+					}
+					else{
+						res=false;
 					}
 				}
 				else if (inter.getNombre() ==0 ){
@@ -69,11 +83,13 @@ bool ParcoursGraphe::anticiper (int i, int k){
 
 
 /**
- * cette fonction parcourt l'arbre des choix de façon récursive en profondeur. Elle place le noeud i,
- * s'appelle elle meme sur le noeud i+1, et revient au point de départ
+ * parcourt l'arbre des choix de façon récursive en profondeur. La fonction place le noeud i,
+ * s'appelle elle meme sur le noeud i+1, et revient au point de départ pour essayer une éventuelle
+ * deuxième possibilité
+ * @param i noeuds courant dans le parcours du graphe
  */
 void  ParcoursGraphe::placer (int i){
-	cout << "debut";
+	//cout << "debut";
 	if(i==1){
 		// Point p=Point(0,0,0);
 		Point p = Point (-18.709, -35.5, -0.007);
@@ -144,7 +160,7 @@ void  ParcoursGraphe::placer (int i){
 		cout << noeuds.exporterXYZ();
 		NombreSolutions ++;
 		cout << NombreSolutions << " solutions trouvées" << endl;
-		int jj; cin>>jj;
+		//int jj; cin>>jj;
 	}
 	else{
 		if (!(noeuds[i]->isPlaced())){
@@ -154,13 +170,15 @@ void  ParcoursGraphe::placer (int i){
 			for( int k=0; k<m;k++){
 				cout << " Noeud " << i << "  --  essai " << k << endl;
 				Point p=*it;
-				noeuds[i]->affecter(p);
-				if (anticiper(i,i)){
-					placer(i+1);
+				if(noeuds[i]->affecter(p)){
+					if (anticiper(i,i)){
+						placer(i+1);
+					}
+					//cout << "FIN ANTICIPATION " << i << endl;
+					desanticiper(i);
 				}
-				cout << "FIN ANTICIPATION " << i << endl;
-				desanticiper(i);
-				cout << "FIN DESANTICIPATION " << i << endl;
+
+				//cout << "FIN DESANTICIPATION " << i << endl;
 				it++;
 			}
 		}
