@@ -43,13 +43,20 @@ string Mol::exporterGraphe() {
 	stringstream out_noeuds;
 	stringstream out_liens;
 
+	int i = 1;
 	for (map<int, Noeud*>::iterator it = noeuds.begin() ; it != noeuds.end(); ++it) {
 		Noeud* n = it->second;
 		out_noeuds << "N " << n->getIndex() << " " << n->getStringType() << endl;
+		if (i <= 3) {
+			Point p = n->getCoord();
+			out_noeuds << "P " << n->getIndex() << " " << p.getX() << " " << p.getY() << " " << p.getZ() << endl;
+		}
 
 		for (map<Noeud*, double>::iterator sub = n->getVoisins().begin() ; sub != n->getVoisins().end(); ++sub) {
 			out_liens << "L " << n->getIndex() << " " << sub->second << " " << sub->first->getIndex() << endl;
 		}
+
+		i++;
 	}
 
 	out_noeuds << out_liens.str();
@@ -170,6 +177,13 @@ Mol Mol::importerGraphe(string path) {
 
 			mol[indexA]->addVoisin(dist, mol[indexB]);
 			mol[indexB]->addVoisin(dist, mol[indexA]);
+		} else if (type == 'P') {
+			int index;
+			double x, y, z;
+
+			istr >> index >> x >> y >> z;
+
+			mol[index]->setCoord(Point(x, y, z));
 		}
 	}
 

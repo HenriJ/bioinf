@@ -17,7 +17,8 @@ using namespace std;
 namespace Constantes
 {
 	double voisinage = 6;
-	double EPSILON = 0.01;
+	double EPSILON_APPARTIENT = 0.02;
+	double EPSILON_CERCLES = 0.0005;
 }
 
 int main(int argc, char *argv[]) {
