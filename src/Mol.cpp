@@ -71,8 +71,7 @@ string Mol::exporterGraphe() {
 Mol Mol::importerPDB(string path) {
 	Mol mol;
 
-	ifstream infile;
-	infile.open(path.c_str());
+	ifstream infile(path.c_str());
 	istream_iterator<string> ii(infile);
 	istream_iterator<string> eos;
 	vector<string> allinstr(ii,eos); //all file is stocked in a vector of string
@@ -89,6 +88,10 @@ Mol Mol::importerPDB(string path) {
 	Noeud* NN;
 	Noeud::Atom AT;
 	for(lec=allinstr.begin(); lec!= allinstr.end(); lec++) {
+		// On s'arrête à la fin de la première molécule décrite
+		if(lec->compare("TER") == 0 || lec->compare("ENDMDL") == 0) {
+			break;
+		}
 		if(lec->compare(Atom)==0) {
 			lec++;
 			lec++;
