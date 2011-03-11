@@ -44,6 +44,18 @@ int main(int argc, char *argv[]) {
 	}
 
 	*output << mol.exporterGraphe();
+	output->flush();
+
+	/*
+	 * Exporte le XYZ de la première molécule trouvée dans le pdb
+	 */
+	std::string xyz = "mol.xyz";
+
+	if (argc > 3) {
+		xyz = argv[3];
+	}
+
+	mol.exporterXYZ(xyz);
 
 	return 0;
 }

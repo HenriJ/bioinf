@@ -204,11 +204,16 @@ string Mol::exporterXYZ() {
 	out << a << "\n";
 	out << "This geometry optimized by G92;  MP2/6-31G* \n";
 
-	for (int i=1;i<=a;i++){
+	for (int i=1; i<=a; i++){
 		out << noeuds[i]->getStringType() << " " << noeuds[i]->getCoord().getX() << " "<< noeuds[i]->getCoord().getY() << " "<< noeuds[i]->getCoord().getZ() << "\n" ;
 	}
 
 	return out.str();
+}
+
+void Mol::exporterXYZ(string path) {
+	ofstream outfile(path.c_str());
+	outfile << exporterXYZ();
 }
 
 /**

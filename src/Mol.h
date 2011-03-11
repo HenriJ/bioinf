@@ -14,6 +14,7 @@ class Mol {
 		Noeud* operator[](int i);
 		std::string exporterGraphe();
 		std::string exporterXYZ();
+		void exporterXYZ(std::string path);
 
 		int size();
 		void insert(Noeud* p);
