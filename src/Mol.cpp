@@ -184,7 +184,7 @@ Mol Mol::importerGraphe(string path) {
 			istr >> index >> x >> y >> z;
 
 			Point p = Point(x, y, z);
-			mol[index]->setCoord(p);
+			mol[index]->affecter(p);
 		}
 	}
 

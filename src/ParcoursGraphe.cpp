@@ -89,10 +89,10 @@ bool ParcoursGraphe::anticiper (int i, int k){
  * @param i noeuds courant dans le parcours du graphe
  */
 void  ParcoursGraphe::placer (int i){
-	//cout << "debut";
-	if(i==1){
-		// Point p=Point(0,0,0);
-		Point p = Point (-18.709, -35.5, -0.007);
+	cout << "debut";
+	/*if(i==1){
+		Point p=Point(0,0,0);
+		//Point p = Point (-18.709, -35.5, -0.007);
 		noeuds[i]->affecter(p);
 		anticiper(i,i);
 		placer(i+1);
@@ -102,7 +102,8 @@ void  ParcoursGraphe::placer (int i){
 		for (map<Noeud*, double>::iterator it = voisins.begin() ; it != voisins.end(); it++ ) {
 			if ((*it).first->getIndex()==2){
 				// Point p=Point(0,0,(*it).second);
-				Point p = Point(-19.164, -35.301, 1.410);
+				//Point p = Point(-19.164, -35.301, 1.410);
+				Point p = Point(1,0,0);
 				noeuds[i]->affecter(p);
 				break;
 			}
@@ -146,28 +147,40 @@ void  ParcoursGraphe::placer (int i){
 		if(d>=0){
 			// double rayonCercle = sqrt(d);
 			// Point p=Point(0,rayonCercle,baryCentre.getZ());
-			Point p = Point(-18.27, -36.021, 2.403);
+			//Point p = Point(-18.27, -36.021, 2.403);
+			Point p = Point (0,1,0);
 			noeuds[3]->affecter(p);
 			anticiper(i,i);
+			int a; cin>>a;
 			placer(i+1);
 		} else {
 			cout << "erreur : les trois premiers points ne sont pas reliés";
+
 		}
 
 
 	}
+	else*/
+	if (i==1||i==2||i==3){
+		anticiper(i,i);
+		placer (i+1);
+	}
+
 	else if (i==(int)(1+noeuds.size())){
 		cout << noeuds.exporterXYZ();
 		NombreSolutions ++;
 		cout << NombreSolutions << " solutions trouvées" << endl;
+
 		//int jj; cin>>jj;
 	}
 	else{
 		if (!(noeuds[i]->isPlaced())){
+			cout << "boup";
+
 			Intersection inter=noeuds[i]->trouverIntersection();
 			int m=inter.getNombre(); //normalement, m=1 ou m=2
 			std::list<Point>::iterator it=inter.getPoints().begin();
-			for( int k=0; k<m;k++){
+			for( int k=0; k<m; k++){
 				cout << " Noeud " << i << "  --  essai " << k << endl;
 				Point p=*it;
 				if(noeuds[i]->affecter(p)){

@@ -234,7 +234,7 @@ Intersection Noeud::trouverIntersection(void) {
 	// s4 est vide ?
 
 	Intersection inter = s1.intersectionQuatreSpheres( s2, s3, s4);
-	/*if( inter.getNombre() == 0){
+	if( inter.getNombre() == 0){
 		cout << endl << " INTERSECTION VIDE : " << endl;
 		cout << endl;
 		cout<< "Noeud n°" << v1 << " : [ " << s1.getCentre().toString() << " ; " << s1.getRayon() <<" ]  _  " <<endl;
@@ -255,7 +255,7 @@ Intersection Noeud::trouverIntersection(void) {
 		for (list<Point>::iterator it = inter.getPoints().begin() ; it != inter.getPoints().end() ; it++){
 			cout << "Point : " << (*it).toString() <<endl;
 		}
-	}*/
+	}
 	return inter;
 
 }
