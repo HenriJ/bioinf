@@ -162,11 +162,11 @@ Mol Mol::importerGraphe(string path) {
 
 			Noeud::Atom atom;
 
-			if (atome.compare("C")) {
+			if (atome.compare("C") == 0) {
 				atom = Noeud::C;
-			} else if (atome.compare("Ca")) {
+			} else if (atome.compare("Ca") == 0) {
 				atom = Noeud::Ca;
-			} else if (atome.compare("N")) {
+			} else if (atome.compare("N") == 0) {
 				atom = Noeud::N;
 			}
 
