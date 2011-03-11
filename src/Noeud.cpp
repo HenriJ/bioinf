@@ -241,7 +241,7 @@ Intersection Noeud::trouverIntersection(void) {
 			cout << "Point : " << (*it).toString() <<endl;
 		}
 	}
-	return s1.intersectionQuatreSpheres( s2, s3, s4);
+	return inter;
 
 }
 

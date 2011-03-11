@@ -144,6 +144,7 @@ void  ParcoursGraphe::placer (int i){
 		cout << noeuds.exporterXYZ();
 		NombreSolutions ++;
 		cout << NombreSolutions << " solutions trouvées" << endl;
+		int jj; cin>>jj;
 	}
 	else{
 		if (!(noeuds[i]->isPlaced())){
