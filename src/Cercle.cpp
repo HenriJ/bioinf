@@ -65,7 +65,7 @@ Intersection Cercle::intersectionCercle(Cercle c){
 		return Intersection(2,ens);
 	}
 	// Un seul point
-	else if (distanceCarree > - Constantes::EPSILON_CERCLES){
+	else if (distanceCarree > - 3* Constantes::EPSILON_CERCLES){
 		ens.push_front(barycentre);
 		std::cout << "PointCercle : "<<barycentre.toString()<<std::endl;
 		return Intersection(1,ens);
