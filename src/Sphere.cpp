@@ -69,6 +69,10 @@ Cercle Sphere::intersectionSphere(Sphere s){
 	}
 }
 
+/**
+ * Fonction effectuant l'intersection d'une sphère et d'un cercle
+ * @param c cercle à intersecter
+ */
 Intersection Sphere::intersectionCercle(Cercle c){
 	if (c.getRayon() < 0){
 		return Intersection (0, std::list<Point>());
@@ -92,16 +96,35 @@ Intersection Sphere::intersectionCercle(Cercle c){
 	}
 }
 
+/**
+ * Fonction retournant l'intersection de la sphère courante avec deux autres sphères
+ * @param t première autre sphère
+ * @param u seconde autre sphère
+ * @return une intersection contenant les points précis d'intersection (non arrondis)
+ */
 Intersection Sphere::intersectionTroisSpheres(Sphere t, Sphere u){
 	return ( this->intersectionCercle(t.intersectionSphere(u)));
 }
 
+/**
+ * Fonction effectuant l'intersection de trois sphères et retournant un résultat utilisable car arrondi
+ * @param t première autre sphère
+ * @param u seconde autre sphère
+ * @return une intersection contenant les points d'intersection arrondis au millième d'angstrom
+ */
 Intersection Sphere::intersectionTroisSpheresArrondi(Sphere t, Sphere u){
 	Intersection E = intersectionTroisSpheres(t,u);
 	Sphere v;
 	return choisir(t, u, v, E, 3);
 }
 
+/**
+ * Fonction effectuant l'intersection de quatre sphères et retournant un résultat utilisable car arrondi
+ * @param t première autre sphère
+ * @param u seconde autre sphère
+ * @param v troisimème autre sphère
+ * @return une intersection contenant les points d'intersection arrondis au millième d'angstrom
+ */
 Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	std::list<Point> s = std::list<Point>();
 	int k = 0;
@@ -122,6 +145,10 @@ Intersection Sphere::intersectionQuatreSpheres(Sphere t, Sphere u, Sphere v){
 	}
 }
 
+/**
+ * Fonction qui teste l'appartenance d'un point à la sphère courante
+ * @param p point à tester
+ */
 bool Sphere::appartient(Point p){
 	double diff = p.moins(this->getCentre()).norme() - this->getRayon();
 	if ( diff < Constantes::EPSILON_APPARTIENT && diff > - Constantes::EPSILON_APPARTIENT){
@@ -143,6 +170,15 @@ string Sphere::toString(void){
 	return out.str();
 }
 
+/**
+ * Fonction qui permet d'arrondir les points d'intersection pour une intersection de plusieurs sphères
+ *
+ * @param t autres sphère
+ * @param u autres sphère
+ * @param v autres sphère
+ * @param E intersection obtenue non arrondie
+ * @param k nombre de sphères à considérer (trois ou quatre en tout)
+ */
 Intersection Sphere::choisir(Sphere t, Sphere u, Sphere v, Intersection E, int k){
 	if (E.getNombre() == 0){
 		return E;
